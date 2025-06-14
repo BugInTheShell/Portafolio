@@ -7,20 +7,26 @@ const PrincipalPage = () => {
 
     const textRef = useRef();
 
-    SplitText.create(textRef.current, {
-        type: "chars",
-        onSplit(self) {
-            gsap.from(self.chars, {
-            duration: 1, 
-            yPercent:[-100,100], 
-            autoAlpha: 0,
-            stagger: {
-                amount: 0.5, 
-                from:"random"
-            }
-            });
-        }
+      useGSAP(() => {
+    if (!textRef.current) return;
+
+    const split = new SplitText(textRef.current, { type: "chars" });
+
+    gsap.from(split.chars, {
+      duration: 1,
+      yPercent: [-100, 100],
+      autoAlpha: 0,
+      stagger: {
+        amount: 0.5,
+        from: "random",
+      },
     });
+
+    // Cleanup si es necesario
+    return () => {
+      split.revert(); // Elimina los spans generados por SplitText
+    };
+  }, []);
   return (
     <div className="sticky">
       <div className="flex justify-between px-4 py-2">
