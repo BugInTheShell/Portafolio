@@ -2,8 +2,9 @@ import PrincipalPage from "./PrincipalPage";
 
 const Index = () => {
   return (
-    <div>
+    <div className="bg-black">
       <PrincipalPage />
+
     </div>
   );
 };

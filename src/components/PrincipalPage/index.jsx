@@ -28,14 +28,14 @@ const PrincipalPage = () => {
     };
   }, []);
   return (
-    <div className="sticky">
+    <div className="sticky bg-sky-500/25 opacity-50 hover:opacity-100">
       <div className="flex justify-between px-4 py-2">
-        <h1 ref={textRef} className="text-xl text-blue-800/75 silkscreen-bold">
+        <h1 ref={textRef} className="text-xl text-blue-500 silkscreen-bold">
           Esteban Galván
         </h1>
 
         <nav>
-          <ul className="flex silkscreen-regular text-cyan-900/75 ">
+          <ul className="flex silkscreen-regular text-cyan-500 ">
             <li className="mx-2 hover:text-cyan-500 hover:scale-110">
               <a href="#about">Inicio</a>
             </li> |
