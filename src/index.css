@@ -15,3 +15,16 @@
   font-weight: 700;
   font-style: normal;
 }
+
+.noto-serif-jp-chinos {
+  font-family: "Noto Serif JP", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.vt323-regular {
+  font-family: "VT323", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
