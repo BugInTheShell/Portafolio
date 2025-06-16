@@ -1,9 +1,9 @@
-import { useEffect, useState , useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import { useGSAP } from '@gsap/react';
 
-const TitlesH1 = ({texto}) => {
+const TitlesH1 = ({texto , style}) => {
 
     const textRef = useRef();
 
@@ -42,8 +42,9 @@ const TitlesH1 = ({texto}) => {
       split.revert(); // Limpieza
     };
   },[]);
+  
   return (
-        <h1 ref={textRef} className="text-xl text-[#CF0F47] silkscreen-bold">
+        <h1 ref={textRef} className={`text-2xl text-[#CF0F47] ${style}`}>
           {texto}
         </h1>
   )

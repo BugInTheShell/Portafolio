@@ -5,7 +5,7 @@ const Inicio = () => {
     <div className='flex p-2 justify-around items-center align-middle h-screen bg-blue-950/25' id="about">
         <div className="block p-2 rounded-lg w-1/3">
 
-            <TitlesH1 texto="Desarrollador FullStack" />
+            <TitlesH1 texto="Desarrollador FullStack" style={"silkscreen-regular"}/>
             <p className="mt-4 text-3xl text-gray-100/75 vt323-regular">
                 Soy un desarrollador web con experiencia en la creación de aplicaciones para agilizar la interacción de usuarios en plataformas digitales.
                 Desarrollo aplicaciones de servidor y administro la nube para despliegue a producción

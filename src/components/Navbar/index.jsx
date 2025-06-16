@@ -5,7 +5,7 @@ const NavBar = () => {
   return (
     <div className="sticky opacity-75 hover:opacity-100">
       <div className="flex justify-between px-4 py-2">
-        <TitlesH1 texto="Esteban Galván" />
+        <TitlesH1 texto="Esteban Galván" style={"silkscreen-bold"} />
 
         <nav>
           <ul className="flex silkscreen-regular text-[#FF0B55] ">
