@@ -1,5 +1,5 @@
 import TitlesH1 from "../TitlesH1";
-import pdfFile from "../../assets/CV.pdf"
+import pdfFile from "../../assets/EstebanGRCV.pdf"
 const NavBar = () => {
 
   const handleDownLoadCV = () => {
