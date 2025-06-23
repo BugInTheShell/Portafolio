@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "daisyui";
 .press-start-2p-regular {
   font-family: "Press Start 2P", system-ui;
   font-weight: 400;
@@ -16,4 +17,15 @@
   font-weight: 400;
   font-style: normal;
 }
+
+.dropdown-mobile {
+  display: none;
+}
+
+@media (max-width: 550px) {
+  .dropdown-mobile {
+    display: block;
+  }
+}
+
 

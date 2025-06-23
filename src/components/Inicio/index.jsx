@@ -2,7 +2,7 @@ import TitlesH1 from "../TitlesH1"
 
 const Inicio = () => {
   return (
-    <div className='flex p-2 justify-around items-center align-middle h-screen bg-blue-950/25' id="about">
+    <div className='flex p-2 justify-around items-center align-middle bg-blue-950/25' id="about">
         <div className="block p-2 rounded-lg w-1/3">
 
             <TitlesH1 texto="Desarrollador FullStack" style={"silkscreen-regular"}/>

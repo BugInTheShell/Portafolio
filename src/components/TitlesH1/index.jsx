@@ -44,7 +44,7 @@ const TitlesH1 = ({texto , style}) => {
   },[]);
   
   return (
-        <h1 ref={textRef} className={`text-2xl text-[#CF0F47] ${style}`}>
+        <h1 ref={textRef} className={`text-2xl mx-2 block w-auto sm:flex text-[#CF0F47] ${style}`}>
           {texto}
         </h1>
   )
