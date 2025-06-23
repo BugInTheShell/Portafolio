@@ -1,6 +1,13 @@
 import TitlesH1 from "../TitlesH1";
-
+import pdfFile from "../../assets/CV.pdf"
 const NavBar = () => {
+
+  const handleDownLoadCV = () => {
+    const link = document.createElement("a");
+    link.href = "/docs/CV.pdf"
+    link.download = "CV.pdf"
+    link.click()
+  }
 
   return (
     <div className="sticky opacity-75 hover:opacity-100">
@@ -22,7 +29,10 @@ const NavBar = () => {
               <a href="#skills">Habilidades</a>
             </li> |
             <li className="mx-2 hover:text-[#FFDEDE] hover:scale-110">
-              <a href="#contact">Contacto</a>
+
+            <a href={pdfFile} target="_blank" download="MiArchivo.pdf">
+              <button>Contacto</button>
+            </a>
             </li> 
           </ul>
         </nav>
