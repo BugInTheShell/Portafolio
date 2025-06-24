@@ -1,12 +1,15 @@
-import TitlesH1 from "../TitlesH1"
+import TitlesH2 from "../TitlesH2"
 
 const Inicio = () => {
   return (
-    <div className='flex p-2 justify-around items-center align-middle bg-blue-950/25' id="about">
+    <div className='flex md:flex lg:flex p-2 justify-around items-center align-middle bg-blue-950/25 sm:block' id="about">
         <div className="block p-2 rounded-lg w-1/3">
 
-            <TitlesH1 texto="Desarrollador FullStack" style={"silkscreen-regular"}/>
-            <p className="mt-4 text-3xl text-gray-100/75 vt323-regular">
+            <TitlesH2>
+              Desarrolador FullStack
+            </TitlesH2>
+
+            <p className="mt-4 text-xl text-gray-100/75 nova-square-regular">
                 Soy un desarrollador web con experiencia en la creación de aplicaciones para agilizar la interacción de usuarios en plataformas digitales.
                 Desarrollo aplicaciones de servidor y administro la nube para despliegue a producción
             </p>

@@ -1,32 +1,30 @@
-import TitlesH1 from "../TitlesH1";
-
 import pdfFile from "../../assets/EstebanGRCV.pdf";
 
 const NavBar = () => {
-
   return (
     <>
+      {/* NAV PRINCIPAL - SOLO en pantallas sm y mayores */}
       <nav className="hidden sm:block">
-            <ul className="flex silkscreen-regular text-[#FF0B55]">
-              <li className="hover:text-[#FFDEDE] hover:scale-110">
-                <a href="#about" className="mx-2">Inicio</a>
-              </li> |
-              <li className="mx-2 hover:text-[#FFDEDE] hover:scale-110">
-                <a href="#experience">Trayectoria</a>
-              </li> |
-              <li className="mx-2 hover:text-[#FFDEDE] hover:scale-110">
-                <a href="#skills">Habilidades</a>
-              </li> |
-              <li className="mx-2 hover:text-[#FFDEDE] hover:scale-110">
-
-              <a href={pdfFile} target="_blank" download="EstebanGRCV.pdf">
-                <button>Contacto</button>
-              </a>
-              </li> 
-            </ul>
+        <ul className="flex silkscreen-regular text-[#FF0B55]">
+          <li className="hover:text-[#FFDEDE] hover:scale-110">
+            <a href="#about" className="mx-2">Inicio</a>
+          </li> |
+          <li className="mx-2 hover:text-[#FFDEDE] hover:scale-110">
+            <a href="#experience">Trayectoria</a>
+          </li> |
+          <li className="mx-2 hover:text-[#FFDEDE] hover:scale-110">
+            <a href="#skills">Habilidades</a>
+          </li> |
+          <li className="mx-2 hover:text-[#FFDEDE] hover:scale-110">
+            <a href={pdfFile} target="_blank" download="EstebanGRCV.pdf">
+              <button>Contacto</button>
+            </a>
+          </li>
+        </ul>
       </nav>
 
-      <div className="dropdown dropdown-end sm:block md:hidden">
+      {/* HAMBURGUESA - SOLO visible en pantallas menores a sm */}
+      <div className="dropdown dropdown-end sm:hidden">
         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle text-[#FF0B55] hover:text-[#FFDEDE]">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
@@ -50,11 +48,9 @@ const NavBar = () => {
           </li>
         </ul>
       </div>
-
-
-
     </>
   );
 };
 
 export default NavBar;
+

@@ -3,7 +3,7 @@ import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import { useGSAP } from '@gsap/react';
 
-const TitlesH1 = ({children}) => {
+const TitlesH2 = ({children}) => {
 
     const textRef = useRef();
 
@@ -23,9 +23,6 @@ const TitlesH1 = ({children}) => {
     });
 
     split.chars.forEach((char) => {
-
-      char.style.display = "inline-block ";
-
       char.addEventListener("mouseenter", () => {
         gsap.fromTo(
           char,
@@ -44,7 +41,7 @@ const TitlesH1 = ({children}) => {
   },[]);
   
   return (
-        <h1 ref={textRef} className={`text-2xl mx-2 block w-auto sm:flex text-[#CF0F47] silkscreen-bold`}>
+        <h1 ref={textRef} className={`text-2xl block w-auto sm:flex text-[#CF0F47] hover:text-[#df7777] silkscreen-regular`}>
           <span>
             {children}
           </span>
@@ -52,4 +49,4 @@ const TitlesH1 = ({children}) => {
   )
 }
 
-export default TitlesH1;
+export default TitlesH2;

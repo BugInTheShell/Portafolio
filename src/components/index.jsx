@@ -10,8 +10,13 @@ const Index = () => {
     <div className="bg-slate-950 p-2 overflow-hidden">
 
       <div className=" flex md:block lg:flex opacity-75 hover:opacity-100 justify-between px-4  py-2 ">
-        <TitlesH1 texto="Esteban Galván" style={"silkscreen-bold"} />
+
+        <TitlesH1>
+          Esteban Galván
+        </TitlesH1>
+
         <NavBar />
+        
       </div>
 
       <Inicio />
