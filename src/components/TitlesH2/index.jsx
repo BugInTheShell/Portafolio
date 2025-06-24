@@ -27,10 +27,7 @@ const TitlesH2 = ({children}) => {
         gsap.fromTo(
           char,
           { y: 0 },
-          {
-            y: -10,
-            duration:1,
-          }
+          { y: -5, duration: 0.3, ease: "back.out(2)" }
         );
       });
     });

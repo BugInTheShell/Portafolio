@@ -12,7 +12,7 @@ const Index = () => {
       <div className=" flex md:block lg:flex opacity-75 hover:opacity-100 justify-between px-4  py-2 ">
 
         <TitlesH1>
-          Esteban Galván
+         <p className="hidden sm:flex md:flex lg;flex">{'>_'}</p> Esteban Galván
         </TitlesH1>
 
         <NavBar />
