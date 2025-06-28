@@ -2,10 +2,15 @@ import { useRef } from "react";
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import { useGSAP } from '@gsap/react';
+import { selectCurrentTheme , hovertheme} from "../../store/themeSlice";
+import {useSelector} from "react-redux"
 
 const TitlesH2 = ({children}) => {
 
     const textRef = useRef();
+
+    const currentTheme = useSelector(selectCurrentTheme)
+
 
     useGSAP(() => {
     if (!textRef.current) return;
@@ -38,11 +43,14 @@ const TitlesH2 = ({children}) => {
   },[]);
   
   return (
-        <h1 ref={textRef} className={`text-2xl block w-auto sm:flex text-[#CF0F47] hover:text-[#df7777] silkscreen-regular`}>
-          <span>
-            {children}
-          </span>
-        </h1>
+<h1
+  ref={textRef}
+  className="text-2xl block w-fit sm:flex silkscreen-regular transition-colors duration-300"
+  style={{ color: currentTheme }}>
+  <span>
+    {">_"}{children}
+  </span>
+</h1>
   )
 }
 

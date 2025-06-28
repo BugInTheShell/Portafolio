@@ -1,28 +1,28 @@
 import TitlesH2 from "../TitlesH2"
+import EstebanPhoto from "../../assets/EstebanPhoto.jpg"
 
 const Inicio = () => {
   return (
-    <div className='flex md:flex lg:flex p-2 justify-around items-center align-middle bg-blue-950/25 sm:block' id="about">
-        <div className="block p-2 rounded-lg">
+    <div className='flex flex-col sm:flex-col md:flex-row lg:flex-row  p-2 justify-around items-center bg-blue-950/25' id="about">
+      <div className="p-2 rounded-lg">
 
-            <TitlesH2>
-              Desarrolador FullStack
-            </TitlesH2>
+        <TitlesH2>
+          Desarrollador FullStack
+        </TitlesH2>
 
-            <div className="flex flex-row align-middle items-center-safe justify-center py-2">
-              <p className="mt-4 text-xl  sm:w-full md:w-1/2 text-gray-100/75 nova-square-regular">
-                  Soy un desarrollador web con experiencia en la creación de aplicaciones para agilizar la interacción de usuarios en plataformas digitales.
-                  Desarrollo aplicaciones de servidor y administro la nube para despliegue a producción
-              </p>
+        <div className="flex flex-col text-center md:flex-row items-center justify-center py-4 gap-4">
+          
+          <p className="text-xl sm:text-start  text-gray-100/75 nova-square-regular sm:w-full md:w-1/2">
+            Soy desarrollador web con experiencia en la creación de aplicaciones dinámicas que optimizan la interacción del usuario en plataformas digitales. 
+            Me especializo en el desarrollo de soluciones backend y la administración de entornos en la nube para asegurar un despliegue eficiente y escalable a producción.
+          </p>
 
-              <div className='w-1/3 flex justify-center'>
-                  <img src="https://th.bing.com/th/id/R.9596d6ee5bf5f9f6cf0a64f74f990064?rik=yPm1vpHh7rlQ8A&riu=http%3a%2f%2f4.bp.blogspot.com%2f-D5NRmQNjh_g%2fT61GxlOENJI%2fAAAAAAAABJo%2fA9zPgiWRSD4%2fs1600%2fshow4.jpg&ehk=gb%2f1mcFB4VUoxvlHPeCy4fmnr5d9vq7yvOnM9RjEDfM%3d&risl=&pid=ImgRaw&r=0" alt="Imagen de perfil" className="h-auto rounded-lg" />
-              </div>
-            </div>
+          <div className='w-fit h-60 sm:w-fit sm:h-32 md:h-auto md:w-96'>
+            <img src={EstebanPhoto} alt="Foto de perfil" className="rounded-full w-full h-full object-cover" />
+          </div>
 
         </div>
-
-
+      </div>
     </div>
   )
 }
