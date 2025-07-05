@@ -11,6 +11,8 @@ const TitlesH2 = ({children}) => {
 
     const currentTheme = useSelector(selectCurrentTheme)
 
+    console.log("Tema actual ",currentTheme)
+
 
     useGSAP(() => {
     if (!textRef.current) return;
@@ -45,8 +47,8 @@ const TitlesH2 = ({children}) => {
   return (
 <h1
   ref={textRef}
-  className="text-2xl block w-fit sm:flex silkscreen-regular transition-colors duration-300"
-  style={{ color: currentTheme }}>
+      className={`text-2xl mx-2 block w-auto sm:flex ${currentTheme.fontFamilyH2} transition-colors duration-300`}
+      style={{ color: currentTheme.textcolor}}>
   <span>
     {">_"}{children}
   </span>

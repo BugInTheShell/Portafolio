@@ -11,7 +11,8 @@ const TitlesH1 = ({ children }) => {
   const textRef = useRef();
 
   const currentTheme = useSelector(selectCurrentTheme)
-  const hoverTheme = useSelector(hovertheme)
+  
+  
 
 
   useGSAP(() => {
@@ -53,8 +54,8 @@ const TitlesH1 = ({ children }) => {
   return (
     <h1
       ref={textRef}
-      className="text-2xl mx-2 block w-auto sm:flex silkscreen-bold transition-colors duration-300"
-      style={{ color: currentTheme }}
+      className={`text-2xl mx-2 block w-auto sm:flex ${currentTheme.fontFamilyH1} transition-colors duration-300`}
+      style={{ color: currentTheme.textcolor}}
       
     >
       <span>{children}</span>

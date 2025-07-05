@@ -4,8 +4,12 @@ import { createSlice } from '@reduxjs/toolkit';
 export const themeSlice = createSlice({
   name: 'theme',
   initialState: {
-    theme: localStorage.getItem("theme") || '#00a80bcb',
-    hovertheme:'#00a80b'
+    theme:{
+      textcolor : localStorage.getItem("theme") || '#00a80bcb',
+      fontFamilyH1: "silkscreen-bold",
+      fontFamilyH2: "silkscreen-regular",
+      hovertheme:'#00a80b'
+    },
   },
   reducers: {
     setTheme: (state, action) => {
