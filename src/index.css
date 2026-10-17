@@ -488,23 +488,6 @@
     box-shadow: 0 0 8px rgb(255 95 86 / 0.45);
   }
 
-  /* Scanlines propias del retrato (el resto de la página usa el barrido global). */
-  .crt-lines {
-    position: relative;
-  }
-
-  .crt-lines::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: repeating-linear-gradient(
-      to bottom,
-      transparent 0 calc(var(--scan, 3px) - 1px),
-      rgb(0 0 0 / var(--scan-alpha, 0.18)) calc(var(--scan, 3px) - 1px) var(--scan, 3px)
-    );
-  }
-
   /* Sombra de checker del diálogo tipo whiptail (dotwork en píxeles).
      Es un hermano detrás del diálogo, así no pinta sobre su fondo. */
   .tty-sombra {
@@ -559,10 +542,6 @@
     border-block: 2px solid var(--color-linea-fuerte);
   }
 
-  .retrato {
-    image-rendering: pixelated;
-  }
-
   /* Animaciones: solo si el usuario no pidió movimiento reducido. */
   @media (prefers-reduced-motion: no-preference) {
     /* backwards: al terminar, el ancho vuelve a auto y no recorta el comando */
@@ -572,10 +551,6 @@
 
     .tty-blink {
       animation: tty-blink 1.06s steps(1, end) 4;
-    }
-
-    .tty-scan {
-      animation: tty-scan 600ms steps(24, end) 300ms both;
     }
   }
 
@@ -595,16 +570,6 @@
     }
   }
 
-  @keyframes tty-scan {
-    from {
-      clip-path: inset(0 0 100% 0);
-    }
-
-    to {
-      clip-path: inset(0);
-    }
-  }
-
   /* Al imprimir o guardar como PDF, todo se ve aunque no se haya hecho scroll. */
   @media print {
     [data-out] {
@@ -617,11 +582,6 @@
 
     .dash-rule {
       transform: none !important;
-    }
-
-    .tty-scan {
-      animation: none !important;
-      clip-path: none !important;
     }
 
     .tty-h1::after,
