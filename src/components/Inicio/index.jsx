@@ -1,6 +1,6 @@
 import retrato from "../../assets/retrato-96.png";
 import pdfFile from "../../assets/EstebanGalvanCV.pdf";
-import { headline, bio } from "../../data/perfil";
+import { headline, bio, contacto } from "../../data/perfil";
 import Prompt from "../Prompt";
 import DitherField from "../DitherField";
 import PixelIcon from "../PixelIcon";
@@ -10,7 +10,8 @@ const Inicio = () => {
     <section id="inicio" className="relative overflow-hidden">
       <DitherField />
 
-      <div className="relative mx-auto grid max-w-[1120px] gap-10 px-4 py-12 md:grid-cols-[1fr_308px] md:gap-12 md:px-8 md:py-24">
+      {/* Dos columnas solo desde lg: a 768px la columna de texto quedaba demasiado estrecha para el h1 */}
+      <div className="relative mx-auto grid max-w-[1120px] gap-10 px-4 py-12 md:px-8 md:py-24 lg:grid-cols-[1fr_308px] lg:gap-12">
         <div className="min-w-0">
           <Prompt cmd="whoami" typed delay={200} />
           <p className="mt-2 font-tty text-[28px] leading-8 text-texto">esteban galván</p>
@@ -23,7 +24,9 @@ const Inicio = () => {
 
           <div className="mt-8 flex flex-wrap gap-4">
             <a href="#contacto" className="tty-btn tty-btn-primario tty-key">
-              <span aria-hidden="true">[ </span>escríbeme<span aria-hidden="true"> ]</span>
+              <span aria-hidden="true">[ </span>
+              {contacto.email || contacto.linkedin ? "escríbeme" : "contacto"}
+              <span aria-hidden="true"> ]</span>
             </a>
             <a href={pdfFile} download="EstebanGalvanCV.pdf" className="tty-btn tty-btn-linea tty-key">
               <PixelIcon name="descarga" />

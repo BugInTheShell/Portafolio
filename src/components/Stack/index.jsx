@@ -19,13 +19,14 @@ const Stack = () => {
         {stack.map((group) => (
           <div key={group.title} className="border-t border-linea py-5" data-out>
             <h3 className="font-tty text-[24px] leading-7 text-fosforo">
-              <span aria-hidden="true" className="hidden font-tty text-[20px] text-tenue md:inline">
+              {/* permisos solo desde lg: a 768px la columna es estrecha y el nombre se partía */}
+              <span aria-hidden="true" className="hidden font-tty text-[20px] text-tenue lg:inline">
                 drwxr-xr-x{" "}
               </span>
               {group.title}
               <span aria-hidden="true">/</span>
             </h3>
-            <Chips items={group.items} className="mt-3 md:pl-[88px]" />
+            <Chips items={group.items} className="mt-3 lg:pl-[88px]" />
           </div>
         ))}
       </div>

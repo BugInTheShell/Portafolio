@@ -17,8 +17,8 @@ const Corchetes = ({ children }) => (
   </>
 );
 
-const Externo = ({ href, children }) => (
-  <a href={href} target="_blank" rel="noreferrer" className="tty-btn tty-btn-linea tty-key">
+const Externo = ({ href, primario = false, children }) => (
+  <a href={href} target="_blank" rel="noreferrer" className={`tty-btn tty-key ${primario ? "tty-btn-primario" : "tty-btn-linea"}`}>
     <PixelIcon name="externo" />
     <Corchetes>{children}</Corchetes>
     <span className="sr-only"> (se abre en otra pestaña)</span>
@@ -41,6 +41,9 @@ const Contacto = () => {
     { scope: footer }
   );
 
+  // Sin correo ni LinkedIn no se promete "escríbeme": GitHub pasa a ser la acción principal.
+  const puedeEscribir = Boolean(contacto.email || contacto.linkedin);
+
   return (
     <>
       <Section
@@ -49,7 +52,11 @@ const Contacto = () => {
         cmd="./contacto.sh"
         tag="[05] contacto"
         title="¿Tienes un funnel que pierde leads o un deploy que da miedo?"
-        intro="Escríbeme y cuéntame qué está roto. Respondo con lo que haría primero."
+        intro={
+          puedeEscribir
+            ? "Escríbeme y cuéntame qué está roto. Respondo con lo que haría primero."
+            : "Revisa mi código en GitHub o descarga mi CV."
+        }
       >
         <div className="relative mr-2 mb-2 max-w-[680px]" data-out>
           <div aria-hidden="true" className="tty-sombra" />
@@ -67,7 +74,11 @@ const Contacto = () => {
                 <PixelIcon name="descarga" />
                 <Corchetes>descargar cv</Corchetes>
               </a>
-              {contacto.github && <Externo href={contacto.github}>github</Externo>}
+              {contacto.github && (
+                <Externo href={contacto.github} primario={!contacto.email}>
+                  github
+                </Externo>
+              )}
               {contacto.linkedin && <Externo href={contacto.linkedin}>linkedin</Externo>}
             </div>
           </div>
