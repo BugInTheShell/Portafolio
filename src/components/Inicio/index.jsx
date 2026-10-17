@@ -32,21 +32,6 @@ const Inicio = () => {
           </div>
         </div>
 
-        <figure className="self-start">
-          <Prompt cmd="catimg retrato.png" host={false} />
-          <div className="px-frame mt-3 w-fit bg-panel p-2">
-            <div className="crt-lines [--scan-alpha:.28] [--scan:2px] md:[--scan:3px]">
-              <img
-                src={retrato}
-                width="96"
-                height="96"
-                alt="Retrato de Esteban Galván en pixel art"
-                className="retrato tty-scan block h-[192px] w-[192px] max-w-none md:h-[288px] md:w-[288px]"
-              />
-            </div>
-          </div>
-          <figcaption className="tty-key mt-3 text-tenue">retrato.png · 96×96</figcaption>
-        </figure>
       </div>
     </section>
   );
