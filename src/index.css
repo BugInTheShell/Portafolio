@@ -1,36 +1,54 @@
 @import "tailwindcss";
 
-/* Tokens del sistema "Blackwork" (Esteban Galván — Ink System). */
+/* Tokens del sistema "Phosphor TTY": tinta, fósforo y píxel. */
 @theme {
-  --color-tinta: #0b0b0c;
-  --color-carbon: #151517;
-  --color-linea: #2e2b29;
-  --color-linea-fuerte: #6b655f;
-  --color-hueso: #e8e3d8;
-  --color-ceniza: #8a8580;
+  --color-tinta: #0a0c0b;
+  --color-panel: #0f1512;
+  --color-linea: #1f3326;
+  --color-linea-fuerte: #3f7a52;
+  --color-fosforo: #5af78e;
+  --color-texto: #c4ecce;
+  --color-tenue: #7fae8c;
+  --color-brasa: #ff5f56;
   --color-sangre: #9b1c1c;
-  --color-sangre-hondo: #7f1616;
-  --color-brasa: #e5484d;
-  --color-laton: #b08d57;
+  --color-sangre-viva: #b3261e;
+  --color-hueso: #e8e3d8;
 
-  --font-serif: "Fraunces Variable", "Iowan Old Style", Georgia, serif;
-  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-tty: "VT323", "VT323 fallback", ui-monospace, monospace;
+  --font-key: "Silkscreen", ui-monospace, monospace;
   --font-mono: "JetBrains Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+/* VT323 es mucho más estrecha que las monoespaciadas del sistema:
+   el fallback ajustado evita el salto de layout al cargar la fuente. */
+@font-face {
+  font-family: "VT323 fallback";
+  src: local("Courier New"), local("DejaVu Sans Mono"), local("Menlo");
+  size-adjust: 66.7%;
 }
 
 @layer base {
   html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    color-scheme: dark;
+    overflow-x: clip;
+    scroll-padding-top: 4rem;
   }
 
   body {
     background: var(--color-tinta);
-    color: var(--color-hueso);
-    font-family: var(--font-sans);
-    font-size: 16px;
-    line-height: 26px;
+    color: var(--color-texto);
+    font-family: var(--font-mono);
+    font-size: 17px;
+    line-height: 28px;
+    font-variant-ligatures: none;
+    font-synthesis: none;
     -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 400;
   }
 
   ::selection {
@@ -39,147 +57,330 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-laton);
-    outline-offset: 2px;
+    outline: 2px solid var(--color-fosforo);
+    outline-offset: 4px;
   }
 
-  @media (prefers-reduced-motion: reduce) {
+  @media (min-width: 768px) {
+    body {
+      font-size: 18px;
+      line-height: 30px;
+    }
+  }
+
+  @media (max-width: 639px) {
+    p {
+      hyphens: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
     html {
-      scroll-behavior: auto;
+      scroll-behavior: smooth;
     }
   }
 }
 
 @layer components {
-  .ink-label {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    line-height: 16px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-ceniza);
-  }
-
-  .ink-display {
-    font-family: var(--font-serif);
+  .tty-h1 {
+    font-family: var(--font-tty);
     font-size: 40px;
     line-height: 1;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    word-spacing: 0.04em;
-    font-variation-settings: "opsz" 72;
+    color: var(--color-fosforo);
+    text-wrap: balance;
   }
 
-  .ink-h2 {
-    font-family: var(--font-serif);
-    font-size: 32px;
+  .tty-h2 {
+    font-family: var(--font-tty);
+    font-size: 36px;
     line-height: 1.05;
-    font-weight: 600;
-    letter-spacing: -0.015em;
-    font-variation-settings: "opsz" 72;
+    color: var(--color-fosforo);
+    text-wrap: balance;
   }
 
-  .ink-h3 {
-    font-family: var(--font-serif);
-    font-size: 24px;
-    line-height: 1.2;
-    font-weight: 500;
-    font-variation-settings: "opsz" 24;
-  }
-
-  .ink-lead {
-    font-size: 18px;
-    line-height: 28px;
+  .tty-h3 {
+    font-family: var(--font-tty);
+    font-size: 26px;
+    line-height: 1.15;
+    color: var(--color-fosforo);
   }
 
   @media (min-width: 768px) {
-    .ink-display {
-      font-size: 64px;
-      line-height: 0.98;
+    .tty-h1 {
+      font-size: 56px;
+      line-height: 0.95;
     }
 
-    .ink-h2 {
-      font-size: 40px;
-    }
-
-    .ink-lead {
-      font-size: 20px;
-      line-height: 30px;
+    .tty-h2 {
+      font-size: 48px;
     }
   }
 
-  .ink-chip {
+  @media (min-width: 1024px) {
+    .tty-h1 {
+      font-size: 72px;
+    }
+  }
+
+  .tty-glow {
+    text-shadow: 0 0 8px rgb(90 247 142 / 0.35);
+  }
+
+  /* Línea de prompt: esteban@bugintheshell:~/cwd$ cmd */
+  .tty-prompt {
+    font-family: var(--font-tty);
+    font-size: 22px;
+    line-height: 28px;
+    color: var(--color-texto);
+  }
+
+  .tty-cmd {
     display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 13px;
-    line-height: 20px;
-    padding: 2px 8px;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: bottom;
+  }
+
+  .tty-comment {
+    color: var(--color-tenue);
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .tty-label {
+    font-family: var(--font-tty);
+    font-size: 20px;
+    line-height: 26px;
+    color: var(--color-tenue);
+  }
+
+  /* Silkscreen solo a 16px: 1 píxel de la fuente = 2px CSS. */
+  .tty-key {
+    font-family: var(--font-key);
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0;
+    text-transform: lowercase;
+  }
+
+  .tty-chip {
+    display: inline-block;
+    padding: 0 8px;
+    font-family: var(--font-tty);
+    font-size: 20px;
+    line-height: 26px;
+    color: var(--color-texto);
+    background: var(--color-tinta);
     border: 1px solid var(--color-linea-fuerte);
-    border-radius: 2px;
     white-space: nowrap;
   }
 
-  .ink-btn {
+  /* Marco de 2px con esquinas en escalón (pixel art). */
+  .px-frame {
+    --c: var(--color-linea-fuerte);
+    margin: 2px;
+    box-shadow:
+      0 -2px 0 0 var(--c),
+      0 2px 0 0 var(--c),
+      -2px 0 0 0 var(--c),
+      2px 0 0 0 var(--c);
+  }
+
+  .tty-btn {
+    --c: var(--color-linea-fuerte);
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    height: 44px;
-    padding: 0 24px;
-    font-family: var(--font-mono);
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    min-height: 44px;
+    margin: 2px;
+    padding: 0 14px;
+    box-shadow:
+      0 -2px 0 0 var(--c),
+      0 2px 0 0 var(--c),
+      -2px 0 0 0 var(--c),
+      2px 0 0 0 var(--c);
   }
 
-  .ink-btn-primary {
+  .tty-btn-primario {
+    --c: var(--color-brasa);
     background: var(--color-sangre);
-    border: 1px solid var(--color-sangre);
     color: var(--color-hueso);
   }
 
-  .ink-btn-primary:hover {
-    background: var(--color-sangre-hondo);
-    border-color: var(--color-sangre-hondo);
+  .tty-btn-primario:hover {
+    background: var(--color-sangre-viva);
   }
 
-  .ink-btn-line {
-    border: 1px solid var(--color-linea-fuerte);
-    color: var(--color-hueso);
+  .tty-btn-linea {
+    background: var(--color-tinta);
+    color: var(--color-texto);
   }
 
-  .ink-btn-line:hover {
-    border-color: var(--color-hueso);
+  .tty-btn-linea:hover {
+    --c: var(--color-fosforo);
+    background: var(--color-fosforo);
+    color: var(--color-tinta);
   }
 
-  /* Sombreado punteado: puntos densos en una esquina que se desvanecen. */
-  .ink-dotwork {
-    background-image: radial-gradient(circle, var(--color-linea-fuerte) 1.5px, transparent 1.6px);
-    background-size: 12px 12px;
-    mask-image: radial-gradient(ellipse at 100% 0%, #000 0%, transparent 65%);
+  @media (prefers-reduced-motion: no-preference) {
+    .tty-btn:active {
+      transform: translateY(2px);
+    }
   }
 
-  .ink-cursor {
+  .tty-cursor {
     display: inline-block;
-    width: 0.55em;
-    height: 1.05em;
-    margin-left: 0.2em;
-    vertical-align: -0.15em;
-    background: var(--color-sangre);
-    animation: ink-blink 1s steps(1) infinite;
+    width: 0.4em;
+    height: 0.75em;
+    margin-left: 0.1em;
+    vertical-align: -0.1em;
+    background: var(--color-brasa);
   }
 
-  @keyframes ink-blink {
+  /* Scanlines: solo sobre barras y el retrato, nunca sobre prosa. */
+  .crt-lines {
+    position: relative;
+  }
+
+  .crt-lines::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0 calc(var(--scan, 3px) - 1px),
+      rgb(0 0 0 / var(--scan-alpha, 0.18)) calc(var(--scan, 3px) - 1px) var(--scan, 3px)
+    );
+  }
+
+  /* Sombra de checker del diálogo tipo whiptail (dotwork en píxeles).
+     Es un hermano detrás del diálogo, así no pinta sobre su fondo. */
+  .tty-sombra {
+    position: absolute;
+    inset: 0;
+    translate: 4px 4px;
+    background: repeating-conic-gradient(var(--color-linea-fuerte) 0 25%, transparent 0 50%) 0 0 / 4px 4px;
+  }
+
+  @media (min-width: 768px) {
+    .tty-sombra {
+      translate: 8px 8px;
+    }
+  }
+
+  /* Dither del hero: tres bandas de densidad decreciente desde la esquina. */
+  .dither {
+    position: absolute;
+    inset: 0;
+    background-image: var(--tile);
+    background-size: var(--size);
+    image-rendering: pixelated;
+  }
+
+  .dither-50 {
+    --tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2 2' shape-rendering='crispEdges'%3E%3Cpath fill='%231f3326' d='M0 0h1v1H0zM1 1h1v1H1z'/%3E%3C/svg%3E");
+    --size: 8px 8px;
+    mask-image: radial-gradient(circle at 100% 0, #000 0 18%, transparent 18%);
+  }
+
+  .dither-25 {
+    --tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2 2' shape-rendering='crispEdges'%3E%3Cpath fill='%231f3326' d='M0 0h1v1H0z'/%3E%3C/svg%3E");
+    --size: 8px 8px;
+    mask-image: radial-gradient(circle at 100% 0, transparent 0 18%, #000 18% 34%, transparent 34%);
+  }
+
+  .dither-12 {
+    --tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4' shape-rendering='crispEdges'%3E%3Cpath fill='%231f3326' d='M0 0h1v1H0zM2 2h1v1H2z'/%3E%3C/svg%3E");
+    --size: 16px 16px;
+    mask-image: radial-gradient(circle at 100% 0, transparent 0 34%, #000 34% 52%, transparent 52%);
+  }
+
+  .dash-rule {
+    height: 4px;
+    background: repeating-linear-gradient(90deg, var(--color-linea-fuerte) 0 8px, transparent 8px 16px);
+  }
+
+  .dot-rule {
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--color-linea-fuerte) 0 2px, transparent 2px 6px);
+  }
+
+  .retrato {
+    image-rendering: pixelated;
+  }
+
+  /* Animaciones: solo si el usuario no pidió movimiento reducido. */
+  @media (prefers-reduced-motion: no-preference) {
+    .tty-type {
+      animation: tty-type calc(var(--n) * 45ms) steps(var(--n), end) var(--delay, 0ms) both;
+    }
+
+    .tty-blink {
+      animation: tty-blink 1.06s steps(1, end) 4;
+    }
+
+    .tty-scan {
+      animation: tty-scan 600ms steps(24, end) 300ms both;
+    }
+  }
+
+  @keyframes tty-type {
+    from {
+      width: 0;
+    }
+
+    to {
+      width: calc(var(--n) * 1ch);
+    }
+  }
+
+  @keyframes tty-blink {
     50% {
       opacity: 0;
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .ink-cursor {
-      animation: none;
+  @keyframes tty-scan {
+    from {
+      clip-path: inset(0 0 100% 0);
+    }
+
+    to {
+      clip-path: inset(0);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .tty-btn,
+    .px-frame {
+      box-shadow: none;
+      border: 2px solid ButtonText;
+    }
+
+    .dither,
+    .tty-sombra {
+      display: none;
+    }
+
+    .tty-glow {
+      text-shadow: none;
+    }
+  }
+
+  @media (prefers-contrast: more) {
+    :root {
+      --color-tenue: #c4ecce;
+    }
+
+    .dither,
+    .tty-sombra {
+      display: none;
+    }
+
+    .tty-glow {
+      text-shadow: none;
     }
   }
 }

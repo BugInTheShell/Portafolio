@@ -1,9 +1,9 @@
-// Fila de chips en mono: las herramientas tal como se escriben.
-const Chips = ({ items }) => {
+// Fila de chips: las herramientas tal como se escriben.
+const Chips = ({ items, className = "" }) => {
   return (
-    <ul className="flex flex-wrap gap-2">
+    <ul className={`flex flex-wrap gap-2 ${className}`}>
       {items.map((item) => (
-        <li key={item} className="ink-chip">
+        <li key={item} className="tty-chip">
           {item}
         </li>
       ))}

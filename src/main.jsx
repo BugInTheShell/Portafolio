@@ -1,9 +1,7 @@
 import { createRoot } from "react-dom/client";
-import "@fontsource-variable/fraunces/opsz.css";
-import "@fontsource/ibm-plex-sans/400.css";
-import "@fontsource/ibm-plex-sans/500.css";
-import "@fontsource/ibm-plex-sans/600.css";
-import "@fontsource-variable/jetbrains-mono";
+import "@fontsource/vt323/400.css";
+import "@fontsource/silkscreen/400.css";
+import "@fontsource-variable/jetbrains-mono/wght.css";
 import "./index.css";
 import App from "./App.jsx";
 
