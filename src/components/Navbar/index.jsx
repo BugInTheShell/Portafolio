@@ -39,7 +39,7 @@ const NavBar = () => {
       toggleRef.current?.focus();
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey); 
   }, [open]);
 
   // Si el foco sale de la navegación, el menú se cierra para no tapar lo enfocado.
