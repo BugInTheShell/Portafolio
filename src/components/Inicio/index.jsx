@@ -11,8 +11,8 @@ const Inicio = () => {
 
       <div className="relative mx-auto max-w-[1120px] px-4 py-12 md:px-8 md:py-24">
         <Prompt cmd="whoami" typed delay={200} />
-        <p className="tty-dw mt-2 text-texto">esteban galván</p>
-        <p className="tty-label">MarTech · Infraestructura · Aliat</p>
+        <p className="tty-dw mt-2 text-texto">Esteban Galván</p>
+        <p className="tty-label">Desarrollador FullStack · Arquitectura y Despliegue · Integraciones IA </p>
 
         <h1 className="tty-h1 tty-glow mt-6 max-w-[22ch]">{headline}</h1>
 

@@ -87,7 +87,7 @@ export const pasatiempos = [
 
 // Deja vacío lo que no quieras mostrar: los enlaces vacíos no se pintan.
 export const contacto = {
-  email: "",
-  linkedin: "",
+  email: "aboutadev@gmail.com",
+  linkedin: "www.linkedin.com/in/esteban-galván-48391a370",
   github: "https://github.com/BugInTheShell",
 };

@@ -55,7 +55,7 @@ const NavBar = () => {
             href="#inicio"
             className="flex items-center font-tty text-[22px] whitespace-nowrap text-fosforo focus-visible:outline-offset-[-4px]"
           >
-            esteban galván
+            Esteban Galván
             <span className="tty-cursor tty-blink" aria-hidden="true" />
           </a>
 

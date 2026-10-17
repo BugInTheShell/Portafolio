@@ -326,7 +326,7 @@
   @media (min-width: 640px) {
     .tty-dw {
       width: max-content;
-      font-size: 50px;
+      font-size: 60px;
       line-height: 62px;
       white-space: nowrap;
       transform: scaleY(0.5);
