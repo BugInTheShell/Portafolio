@@ -36,7 +36,7 @@
   /* Margen para la barra fija al saltar por anclas. Va en las secciones, no en
      html: con scroll-padding, enfocar un control de la barra fija hacía saltar la página. */
   section[id] {
-    scroll-margin-top: 4rem;
+    scroll-margin-top: 2.8125rem; /* alto de la barra (44px + borde): el divisor previo queda debajo */
   }
 
   body {
