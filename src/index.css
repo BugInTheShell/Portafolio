@@ -31,7 +31,12 @@
   html {
     color-scheme: dark;
     overflow-x: clip;
-    scroll-padding-top: 4rem;
+  }
+
+  /* Margen para la barra fija al saltar por anclas. Va en las secciones, no en
+     html: con scroll-padding, enfocar un control de la barra fija hacía saltar la página. */
+  section[id] {
+    scroll-margin-top: 4rem;
   }
 
   body {
@@ -299,7 +304,7 @@
 
   .dash-rule {
     height: 4px;
-    background: repeating-linear-gradient(90deg, var(--color-linea-fuerte) 0 8px, transparent 8px 16px);
+    background: repeating-linear-gradient(90deg, var(--color-linea) 0 8px, transparent 8px 16px);
   }
 
   .dot-rule {
@@ -313,8 +318,9 @@
 
   /* Animaciones: solo si el usuario no pidió movimiento reducido. */
   @media (prefers-reduced-motion: no-preference) {
+    /* backwards: al terminar, el ancho vuelve a auto y no recorta el comando */
     .tty-type {
-      animation: tty-type calc(var(--n) * 45ms) steps(var(--n), end) var(--delay, 0ms) both;
+      animation: tty-type calc(var(--n) * 45ms) steps(var(--n), end) var(--delay, 0ms) backwards;
     }
 
     .tty-blink {
@@ -349,6 +355,26 @@
 
     to {
       clip-path: inset(0);
+    }
+  }
+
+  /* Al imprimir o guardar como PDF, todo se ve aunque no se haya hecho scroll. */
+  @media print {
+    [data-out] {
+      opacity: 1 !important;
+    }
+
+    [data-cmd] {
+      width: auto !important;
+    }
+
+    .dash-rule {
+      transform: none !important;
+    }
+
+    .tty-scan {
+      animation: none !important;
+      clip-path: none !important;
     }
   }
 

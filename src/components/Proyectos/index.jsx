@@ -22,9 +22,9 @@ const Proyectos = () => {
       title="Proyectos destacados"
       intro="Cosas que están en producción y por qué existen."
     >
-      <div className="grid gap-8 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         {proyectos.map((proyecto, i) => (
-          <article key={proyecto.title} className="px-frame bg-panel" data-out>
+          <article key={proyecto.title} className="px-frame min-w-0 bg-panel" data-out>
             <div
               aria-hidden="true"
               className="crt-lines flex h-8 items-center justify-between gap-3 bg-tenue px-3 font-tty text-[20px] text-tinta"

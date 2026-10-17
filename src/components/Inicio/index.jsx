@@ -10,7 +10,7 @@ const Inicio = () => {
     <section id="inicio" className="relative overflow-hidden">
       <DitherField />
 
-      <div className="relative mx-auto grid max-w-[1120px] gap-10 px-4 py-12 md:grid-cols-[1fr_288px] md:gap-12 md:px-8 md:py-24">
+      <div className="relative mx-auto grid max-w-[1120px] gap-10 px-4 py-12 md:grid-cols-[1fr_308px] md:gap-12 md:px-8 md:py-24">
         <div className="min-w-0">
           <Prompt cmd="whoami" typed delay={200} />
           <p className="mt-2 font-tty text-[28px] leading-8 text-texto">esteban galván</p>
@@ -41,7 +41,7 @@ const Inicio = () => {
                 width="96"
                 height="96"
                 alt="Retrato de Esteban Galván en pixel art"
-                className="retrato tty-scan block h-[192px] w-[192px] md:h-[288px] md:w-[288px]"
+                className="retrato tty-scan block h-[192px] w-[192px] max-w-none md:h-[288px] md:w-[288px]"
               />
             </div>
           </div>

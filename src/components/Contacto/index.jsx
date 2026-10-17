@@ -86,7 +86,9 @@ const Contacto = () => {
             </span>
             <span className="sr-only">Esteban Galván</span>
           </p>
-          <p className="tty-label"># hecho con React, Tailwind y tinta</p>
+          <p className="tty-label">
+            <span aria-hidden="true"># </span>hecho con React, Tailwind y tinta
+          </p>
         </div>
       </footer>
     </>

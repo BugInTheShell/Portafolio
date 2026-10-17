@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const links = [
   { href: "#stack", n: 1, label: "stack" },
@@ -12,6 +12,7 @@ const links = [
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
+  const toggleRef = useRef();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -29,81 +30,100 @@ const NavBar = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Escape cierra el menú y devuelve el foco al botón que lo abrió.
   useEffect(() => {
     if (!open) return;
-    const onKey = (e) => e.key === "Escape" && setOpen(false);
+    const onKey = (e) => {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      toggleRef.current?.focus();
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
+  // Si el foco sale de la navegación, el menú se cierra para no tapar lo enfocado.
+  const onBlur = (e) => {
+    if (open && !e.currentTarget.contains(e.relatedTarget)) setOpen(false);
+  };
+
   return (
     <header className="sticky top-0 z-10 border-b border-linea bg-panel">
-      <nav className="mx-auto flex h-11 max-w-[1120px] items-stretch justify-between px-4 md:px-8" aria-label="Principal">
-        <a href="#inicio" className="flex items-center font-tty text-[22px] whitespace-nowrap text-fosforo">
-          esteban galván
-          <span className="tty-cursor tty-blink" aria-hidden="true" />
-        </a>
+      <nav aria-label="Principal" onBlur={onBlur}>
+        <div className="mx-auto flex h-11 max-w-[1120px] items-stretch justify-between px-4 md:px-8">
+          <a
+            href="#inicio"
+            className="flex items-center font-tty text-[22px] whitespace-nowrap text-fosforo focus-visible:outline-offset-[-4px]"
+          >
+            esteban galván
+            <span className="tty-cursor tty-blink" aria-hidden="true" />
+          </a>
 
-        <ul className="hidden items-stretch md:flex">
-          {links.map((link) => {
-            const isActive = active === link.href;
-            return (
-              <li key={link.href} className="flex">
-                <a
-                  href={link.href}
-                  aria-current={isActive ? "location" : undefined}
-                  className={`flex items-center px-2 font-tty text-[20px] focus-visible:outline-offset-[-4px] ${
-                    isActive ? "crt-lines bg-fosforo text-tinta focus-visible:outline-tinta" : "text-tenue hover:text-texto"
-                  }`}
-                >
-                  <span aria-hidden="true">{link.n}:</span>
-                  {link.label}
-                  {link.sr && <span className="sr-only">{link.sr}</span>}
-                  <span aria-hidden="true" className="inline-block w-[1ch]">
-                    {isActive ? "*" : ""}
-                  </span>
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+          <ul className="hidden items-stretch md:flex">
+            {links.map((link) => {
+              const isActive = active === link.href;
+              return (
+                <li key={link.href} className="flex">
+                  <a
+                    href={link.href}
+                    aria-current={isActive ? "location" : undefined}
+                    className={`flex items-center px-2 font-tty text-[20px] focus-visible:outline-offset-[-4px] ${
+                      isActive ? "crt-lines bg-fosforo text-tinta focus-visible:outline-tinta" : "text-tenue hover:text-texto"
+                    }`}
+                  >
+                    <span aria-hidden="true">{link.n}:</span>
+                    {link.label}
+                    {link.sr && <span className="sr-only">{link.sr}</span>}
+                    <span aria-hidden="true" className="inline-block w-[1ch]">
+                      {isActive ? "*" : ""}
+                    </span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
 
-        <button
-          type="button"
-          className="tty-key flex min-w-11 items-center justify-center text-fosforo md:hidden"
-          aria-expanded={open}
-          aria-controls="menu-movil"
-          onClick={() => setOpen(!open)}
-        >
-          <span aria-hidden="true">[</span>
-          {open ? "cerrar" : "menú"}
-          <span aria-hidden="true">]</span>
-        </button>
+          <button
+            ref={toggleRef}
+            type="button"
+            className="tty-key flex min-w-11 items-center justify-center text-fosforo focus-visible:outline-offset-[-4px] md:hidden"
+            aria-expanded={open}
+            aria-controls="menu-movil"
+            onClick={() => setOpen(!open)}
+          >
+            <span aria-hidden="true">[</span>
+            {open ? "cerrar" : "menú"}
+            <span aria-hidden="true">]</span>
+          </button>
+        </div>
+
+        {open && (
+          <ul id="menu-movil" className="border-t border-linea bg-panel md:hidden">
+            {links.map((link) => {
+              const isActive = active === link.href;
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    aria-current={isActive ? "location" : undefined}
+                    onClick={() => setOpen(false)}
+                    className={`flex h-11 items-center px-4 font-tty text-[22px] focus-visible:outline-offset-[-4px] ${
+                      isActive ? "bg-fosforo text-tinta focus-visible:outline-tinta" : "text-texto"
+                    }`}
+                  >
+                    <span aria-hidden="true">({link.n})&nbsp;</span>
+                    {link.label}
+                    {link.sr && <span className="sr-only">{link.sr}</span>}
+                    <span aria-hidden="true" className="ml-2">
+                      {isActive ? "*" : ""}
+                    </span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </nav>
-
-      {open && (
-        <ul id="menu-movil" className="border-t border-linea bg-panel md:hidden">
-          {links.map((link) => {
-            const isActive = active === link.href;
-            return (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  aria-current={isActive ? "location" : undefined}
-                  onClick={() => setOpen(false)}
-                  className={`flex h-11 items-center px-4 font-tty text-[22px] focus-visible:outline-offset-[-4px] ${
-                    isActive ? "bg-fosforo text-tinta focus-visible:outline-tinta" : "text-texto"
-                  }`}
-                >
-                  <span aria-hidden="true">({link.n})&nbsp;</span>
-                  {link.label}
-                  {link.sr && <span className="sr-only">{link.sr}</span>}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      )}
     </header>
   );
 };

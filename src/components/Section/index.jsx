@@ -17,11 +17,24 @@ const Section = ({ id, cwd, cmd, tag, title, intro, children }) => {
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         const n = cmd.length;
+        const outs = ref.current.querySelectorAll("[data-out]").length;
         const tl = gsap.timeline({
           scrollTrigger: { trigger: ref.current, start: "top 80%", once: true },
         });
-        tl.fromTo("[data-cmd]", { width: 0 }, { width: `${n}ch`, ease: `steps(${n})`, duration: Math.min(n * 0.04, 0.6) });
-        tl.fromTo("[data-out]", { opacity: 0 }, { opacity: 1, ease: "steps(1)", duration: 0.06, stagger: 0.06 });
+        // clearProps devuelve el ancho a auto al terminar (no recorta con espaciado de texto ampliado)
+        tl.fromTo(
+          "[data-cmd]",
+          { width: 0 },
+          { width: `${n}ch`, ease: `steps(${n})`, duration: Math.min(n * 0.04, 0.6), clearProps: "width" }
+        );
+        // la salida completa se imprime en 0.3s como mucho
+        if (outs) {
+          tl.fromTo(
+            "[data-out]",
+            { opacity: 0 },
+            { opacity: 1, ease: "steps(1)", duration: 0.06, stagger: Math.min(0.06, 0.24 / Math.max(1, outs - 1)) }
+          );
+        }
       });
       return () => mm.revert();
     },
