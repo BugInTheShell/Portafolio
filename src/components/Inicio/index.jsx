@@ -1,30 +1,40 @@
-import TitlesH2 from "../TitlesH2"
-import EstebanPhoto from "../../assets/EstebanPhoto.jpg"
+import EstebanPhoto from "../../assets/EstebanPhoto.jpg";
+import pdfFile from "../../assets/EstebanGalvanCV.pdf";
+import { headline, bio } from "../../data/perfil";
 
 const Inicio = () => {
   return (
-    <div className='flex flex-col sm:flex-col md:flex-row lg:flex-row  p-2 justify-around items-center bg-blue-950/25' id="about">
-      <div className="p-2 rounded-lg">
+    <section id="inicio" className="relative overflow-hidden">
+      <div className="ink-dotwork pointer-events-none absolute inset-0" aria-hidden="true" />
 
-        <TitlesH2>
-          Desarrollador FullStack
-        </TitlesH2>
+      <div className="relative mx-auto grid max-w-[1120px] items-center gap-12 px-4 py-16 md:grid-cols-[1fr_280px] md:px-8 md:py-28">
+        <div>
+          <p className="ink-label">MarTech · Infraestructura · Aliat</p>
+          <h1 className="ink-display mt-6 max-w-[18ch]">{headline}</h1>
+          <p className="ink-lead mt-8 max-w-[60ch] text-ceniza">{bio}</p>
 
-        <div className="flex flex-col text-center md:flex-row items-center justify-center py-4 gap-4">
-          
-          <p className="text-xl sm:text-start  text-gray-100/75 nova-square-regular sm:w-full md:w-1/2">
-            Soy desarrollador web con experiencia en la creación de aplicaciones dinámicas que optimizan la interacción del usuario en plataformas digitales. 
-            Me especializo en el desarrollo de soluciones backend y la administración de entornos en la nube para asegurar un despliegue eficiente y escalable a producción.
-          </p>
-
-          <div className='w-fit h-60 sm:w-fit sm:h-32 md:h-auto md:w-96'>
-            <img src={EstebanPhoto} alt="Foto de perfil" className="rounded-full w-full h-full object-cover" />
+          <div className="mt-10 flex flex-wrap gap-4">
+            <a href="#contacto" className="ink-btn ink-btn-primary">
+              Escríbeme
+            </a>
+            <a href={pdfFile} download="EstebanGalvanCV.pdf" className="ink-btn ink-btn-line">
+              Descargar CV
+            </a>
           </div>
+        </div>
 
+        <div className="order-first w-40 md:order-none md:w-full">
+          <div className="aspect-square border border-linea p-2">
+            <img
+              src={EstebanPhoto}
+              alt="Retrato de Esteban Galván"
+              className="h-full w-full object-cover grayscale contrast-125"
+            />
+          </div>
         </div>
       </div>
-    </div>
-  )
-}
+    </section>
+  );
+};
 
-export default Inicio
+export default Inicio;

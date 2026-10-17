@@ -1,68 +1,185 @@
-.press-start-2p-regular {
-  font-family: "Press Start 2P", system-ui;
-  font-weight: 600;
-  font-style: normal;
+@import "tailwindcss";
+
+/* Tokens del sistema "Blackwork" (Esteban Galván — Ink System). */
+@theme {
+  --color-tinta: #0b0b0c;
+  --color-carbon: #151517;
+  --color-linea: #2e2b29;
+  --color-linea-fuerte: #6b655f;
+  --color-hueso: #e8e3d8;
+  --color-ceniza: #8a8580;
+  --color-sangre: #9b1c1c;
+  --color-sangre-hondo: #7f1616;
+  --color-brasa: #e5484d;
+  --color-laton: #b08d57;
+
+  --font-serif: "Fraunces Variable", "Iowan Old Style", Georgia, serif;
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
 }
 
-.silkscreen-regular {
-  font-family: "Silkscreen", sans-serif;
-  font-weight: 300;
-  font-style: normal;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background: var(--color-tinta);
+    color: var(--color-hueso);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 26px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--color-sangre);
+    color: var(--color-hueso);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-laton);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
 }
 
-.silkscreen-bold {
-  font-family: "Silkscreen", sans-serif;
-  font-weight: 700;
-  font-style: normal;
+@layer components {
+  .ink-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-ceniza);
+  }
+
+  .ink-display {
+    font-family: var(--font-serif);
+    font-size: 40px;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    word-spacing: 0.04em;
+    font-variation-settings: "opsz" 72;
+  }
+
+  .ink-h2 {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    font-variation-settings: "opsz" 72;
+  }
+
+  .ink-h3 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    line-height: 1.2;
+    font-weight: 500;
+    font-variation-settings: "opsz" 24;
+  }
+
+  .ink-lead {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  @media (min-width: 768px) {
+    .ink-display {
+      font-size: 64px;
+      line-height: 0.98;
+    }
+
+    .ink-h2 {
+      font-size: 40px;
+    }
+
+    .ink-lead {
+      font-size: 20px;
+      line-height: 30px;
+    }
+  }
+
+  .ink-chip {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 20px;
+    padding: 2px 8px;
+    border: 1px solid var(--color-linea-fuerte);
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  .ink-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 24px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  .ink-btn-primary {
+    background: var(--color-sangre);
+    border: 1px solid var(--color-sangre);
+    color: var(--color-hueso);
+  }
+
+  .ink-btn-primary:hover {
+    background: var(--color-sangre-hondo);
+    border-color: var(--color-sangre-hondo);
+  }
+
+  .ink-btn-line {
+    border: 1px solid var(--color-linea-fuerte);
+    color: var(--color-hueso);
+  }
+
+  .ink-btn-line:hover {
+    border-color: var(--color-hueso);
+  }
+
+  /* Sombreado punteado: puntos densos en una esquina que se desvanecen. */
+  .ink-dotwork {
+    background-image: radial-gradient(circle, var(--color-linea-fuerte) 1.5px, transparent 1.6px);
+    background-size: 12px 12px;
+    mask-image: radial-gradient(ellipse at 100% 0%, #000 0%, transparent 65%);
+  }
+
+  .ink-cursor {
+    display: inline-block;
+    width: 0.55em;
+    height: 1.05em;
+    margin-left: 0.2em;
+    vertical-align: -0.15em;
+    background: var(--color-sangre);
+    animation: ink-blink 1s steps(1) infinite;
+  }
+
+  @keyframes ink-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ink-cursor {
+      animation: none;
+    }
+  }
 }
-
-.vt323-regular {
-  font-family: "VT323", monospace;
-  font-weight: 500;
-  font-style: normal;
-}
-.vt323-bold {
-  font-family: "VT323", monospace;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.akaya-kanadaka-regular {
-  font-family: "Akaya Kanadaka", system-ui;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.akaya-kanadaka-bold {
-  font-family: "Akaya Kanadaka", system-ui;
-  font-weight: bold;
-  font-style: normal;
-}
-
-
-.manufacturing-consent-regular {
-  font-family: "Manufacturing Consent", system-ui;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.manufacturing-consent-bold {
-  font-family: "Manufacturing Consent", system-ui;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.irish-grover-regular {
-  font-family: "Irish Grover", system-ui;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.irish-grover-bold {
-  font-family: "Irish Grover", system-ui;
-  font-weight: 700;
-  font-style: normal;
-}
-
-
-
