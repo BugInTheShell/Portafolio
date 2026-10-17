@@ -4,7 +4,7 @@ import { stack, herramientas } from "../../data/perfil";
 
 const Stack = () => {
   return (
-    <Section id="stack" index={1} label="Stack" title="Con qué trabajo" intro="Herramientas que uso a diario en producción, no una lista de cursos.">
+    <Section id="stack" number={1} label="Stack" title="Con qué trabajo" intro="Herramientas que uso a diario en producción, no una lista de cursos.">
       <div className="grid gap-x-12 md:grid-cols-2">
         {stack.map((group) => (
           <div key={group.title} className="grid gap-3 border-t border-linea py-6">

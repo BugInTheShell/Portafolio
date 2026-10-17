@@ -8,7 +8,7 @@ const links = [
 ];
 
 const NavBar = () => {
-  const [open, setOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-10 border-b border-linea bg-tinta/90 backdrop-blur-sm">
@@ -31,19 +31,19 @@ const NavBar = () => {
         <button
           type="button"
           className="ink-label sm:hidden"
-          aria-expanded={open}
+          aria-expanded={isMenuOpen}
           aria-controls="menu-movil"
-          onClick={() => setOpen(!open)}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          {open ? "Cerrar" : "Menú"}
+          {isMenuOpen ? "Cerrar" : "Menú"}
         </button>
       </nav>
 
-      {open && (
+      {isMenuOpen && (
         <ul id="menu-movil" className="border-t border-linea px-4 py-2 sm:hidden">
           {links.map((link) => (
             <li key={link.href}>
-              <a href={link.href} className="ink-label block py-3 hover:text-hueso" onClick={() => setOpen(false)}>
+              <a href={link.href} className="ink-label block py-3 hover:text-hueso" onClick={() => setIsMenuOpen(false)}>
                 {link.label}
               </a>
             </li>

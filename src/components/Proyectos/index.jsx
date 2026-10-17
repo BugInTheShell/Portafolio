@@ -4,7 +4,7 @@ import { proyectos } from "../../data/perfil";
 
 const Proyectos = () => {
   return (
-    <Section id="proyectos" index={2} label="Proyectos" title="Proyectos destacados" intro="Cosas que están en producción y por qué existen.">
+    <Section id="proyectos" number={2} label="Proyectos" title="Proyectos destacados" intro="Cosas que están en producción y por qué existen.">
       <div className="grid gap-8 md:grid-cols-2">
         {proyectos.map((proyecto) => (
           <article key={proyecto.title} className="grid content-start gap-4 border border-linea bg-carbon p-6">

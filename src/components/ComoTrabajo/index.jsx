@@ -3,7 +3,7 @@ import { principios } from "../../data/perfil";
 
 const ComoTrabajo = () => {
   return (
-    <Section id="metodo" index={3} label="Método" title="Cómo trabajo" intro="Lo que puedes esperar si trabajamos juntos.">
+    <Section id="metodo" number={3} label="Método" title="Cómo trabajo" intro="Lo que puedes esperar si trabajamos juntos.">
       <ol>
         {principios.map((principio, i) => (
           <li key={principio.title} className="grid grid-cols-[56px_1fr] gap-4 border-t border-linea py-6">
