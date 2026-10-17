@@ -32,7 +32,7 @@ const ComoTrabajo = () => {
           </li>
         ))}
       </ol>
-      <p aria-hidden="true" className="crt-lines mt-6 bg-tenue px-2 font-tty text-[20px] leading-7 text-tinta" data-out>
+      <p aria-hidden="true" className="tty-rev tty-rev-tenue mt-6 px-2 font-tty text-[20px] leading-7" data-out>
         <span className="max-sm:hidden">Página de manual esteban(1) línea 1 (END) (pulse q para salir)</span>
         <span className="sm:hidden">esteban(1) (END)</span>
       </p>

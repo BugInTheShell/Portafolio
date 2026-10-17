@@ -48,7 +48,7 @@ const NavBar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-10 border-b border-linea bg-panel">
+    <header className="sticky top-(--crt-bezel) z-10 border-b border-linea bg-panel">
       <nav aria-label="Principal" onBlur={onBlur}>
         <div className="mx-auto flex h-11 max-w-[1120px] items-stretch justify-between px-4 md:px-8">
           <a
@@ -68,7 +68,7 @@ const NavBar = () => {
                     href={link.href}
                     aria-current={isActive ? "location" : undefined}
                     className={`flex items-center px-2 font-tty text-[20px] focus-visible:outline-offset-[-4px] ${
-                      isActive ? "crt-lines bg-fosforo text-tinta focus-visible:outline-tinta" : "text-tenue hover:text-texto"
+                      isActive ? "tty-rev focus-visible:outline-tinta" : "text-tenue hover:text-texto"
                     }`}
                   >
                     <span aria-hidden="true">{link.n}:</span>
@@ -108,7 +108,7 @@ const NavBar = () => {
                     aria-current={isActive ? "location" : undefined}
                     onClick={() => setOpen(false)}
                     className={`flex h-11 items-center px-4 font-tty text-[22px] focus-visible:outline-offset-[-4px] ${
-                      isActive ? "bg-fosforo text-tinta focus-visible:outline-tinta" : "text-texto"
+                      isActive ? "tty-rev focus-visible:outline-tinta" : "text-texto"
                     }`}
                   >
                     <span aria-hidden="true">({link.n})&nbsp;</span>

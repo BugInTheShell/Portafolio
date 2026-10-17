@@ -19,7 +19,7 @@ const Prompt = ({ cwd = "~", cmd, tag, host = true, typed = false, delay = 0, cl
           {cmd}
         </span>
       </span>
-      {tag && <span className="text-tenue max-sm:hidden">{tag}</span>}
+      {tag && <span className="tty-rev tty-rev-tenue px-[1ch] max-sm:hidden">{tag}</span>}
     </p>
   );
 };

@@ -14,7 +14,7 @@ const Inicio = () => {
       <div className="relative mx-auto grid max-w-[1120px] gap-10 px-4 py-12 md:px-8 md:py-24 lg:grid-cols-[1fr_308px] lg:gap-12">
         <div className="min-w-0">
           <Prompt cmd="whoami" typed delay={200} />
-          <p className="mt-2 font-tty text-[28px] leading-8 text-texto">esteban galván</p>
+          <p className="tty-dw mt-2 text-texto">esteban galván</p>
           <p className="tty-label">MarTech · Infraestructura · Aliat</p>
 
           <h1 className="tty-h1 tty-glow mt-6 max-w-[22ch]">{headline}</h1>

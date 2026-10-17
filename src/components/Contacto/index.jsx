@@ -60,8 +60,8 @@ const Contacto = () => {
       >
         <div className="relative mr-2 mb-2 max-w-[680px]" data-out>
           <div aria-hidden="true" className="tty-sombra" />
-          <div className="relative border-2 border-fosforo bg-panel p-5 pt-7 md:p-8">
-            <span aria-hidden="true" className="tty-key absolute -top-3 left-4 bg-tinta px-2 text-fosforo">
+          <div className="relative border-[6px] border-double border-fosforo bg-panel p-4 pt-8 md:p-8">
+            <span aria-hidden="true" className="tty-key tty-rev absolute -top-[15px] left-4 px-2">
               contacto.sh
             </span>
             <div className="flex flex-wrap gap-4">

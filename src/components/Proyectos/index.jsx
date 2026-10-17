@@ -27,7 +27,7 @@ const Proyectos = () => {
           <article key={proyecto.title} className="px-frame min-w-0 bg-panel" data-out>
             <div
               aria-hidden="true"
-              className="crt-lines flex h-8 items-center justify-between gap-3 bg-tenue px-3 font-tty text-[20px] text-tinta"
+              className="tty-rev tty-rev-tenue flex h-8 items-center justify-between gap-3 px-3 font-tty text-[20px]"
             >
               <span className="min-w-0 truncate">{slug(proyecto.title)}.md</span>
               <span className="max-sm:hidden">
