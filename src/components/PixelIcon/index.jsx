@@ -1,4 +1,5 @@
 import { ICONS } from "./icons";
+import "./PixelIcon.scss";
 
 // Une los píxeles contiguos de cada fila en un solo rectángulo.
 function toPath(rows, digit) {
@@ -25,11 +26,11 @@ const PixelIcon = ({ name, cell = 2, className = "", style }) => {
       shapeRendering="crispEdges"
       aria-hidden="true"
       focusable="false"
-      className={`inline-block shrink-0 ${className}`}
+      className={`pixel-icon ${className}`.trim()}
       style={style}
     >
       <path fill="currentColor" d={toPath(rows, 1)} />
-      {accent && <path className="fill-fosforo" d={accent} />}
+      {accent && <path className="pixel-icon__accent" d={accent} />}
     </svg>
   );
 };
@@ -41,8 +42,8 @@ export const ConFlechas = ({ text }) =>
       ? [parte]
       : [
           " ",
-          <PixelIcon key={`f${i}`} name="flecha" style={{ width: ".32em", height: ".2em", verticalAlign: ".12em" }} />,
-          <span key={`s${i}`} className="sr-only">
+          <PixelIcon key={`f${i}`} name="flecha" className="pixel-icon--inline" />,
+          <span key={`s${i}`} className="visually-hidden">
             →
           </span>,
           " ",

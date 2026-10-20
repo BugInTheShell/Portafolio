@@ -1,0 +1,89 @@
+@use "../../styles/abstracts" as *;
+
+.projects {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+
+  @include up(md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.project-card {
+  @include pixel-frame(var(--color-linea-fuerte));
+  min-width: 0;
+  margin: 2px;
+  background: var(--color-panel);
+
+  @media (forced-colors: active) {
+    box-shadow: none;
+    border: 2px solid ButtonText;
+  }
+
+  &__bar {
+    @include reverse-video(tenue);
+    display: flex;
+    height: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-inline: 0.75rem;
+    font-family: var(--font-tty);
+    font-size: 20px;
+  }
+
+  &__file {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__count {
+    @include down(sm) {
+      display: none;
+    }
+  }
+
+  &__body {
+    display: grid;
+    gap: 1rem;
+    padding: 1.25rem;
+
+    @include up(md) {
+      padding: 1.5rem;
+    }
+  }
+
+  &__details {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  &__term {
+    @include tty-key;
+
+    &--problem {
+      color: var(--color-brasa);
+    }
+
+    &--solution {
+      color: var(--color-fosforo);
+    }
+
+    &--stack {
+      color: var(--color-tenue);
+    }
+  }
+
+  &__description {
+    margin-bottom: 0.75rem;
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  &__chips {
+    margin-top: 0.25rem;
+  }
+}

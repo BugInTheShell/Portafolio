@@ -1,0 +1,6 @@
+@use "../abstracts" as *;
+
+// Texto solo para lectores de pantalla.
+.visually-hidden {
+  @include visually-hidden;
+}

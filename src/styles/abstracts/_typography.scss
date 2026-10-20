@@ -1,0 +1,35 @@
+// Voces de la terminal. Se aplican a elementos BEM con @include.
+
+// Línea de prompt: esteban@bugintheshell:~/cwd$ cmd
+@mixin tty-prompt {
+  font-family: var(--font-tty);
+  font-size: 22px;
+  line-height: 28px;
+  color: var(--color-texto);
+}
+
+// Cada fila de la voz de terminal mide 28px, como el prompt: una fila del VT100.
+@mixin tty-comment {
+  font-size: 16px;
+  line-height: 28px;
+  color: var(--color-tenue);
+  text-shadow: none;
+}
+
+@mixin tty-label {
+  font-family: var(--font-tty);
+  font-size: 20px;
+  line-height: 28px;
+  color: var(--color-tenue);
+  text-shadow: none;
+}
+
+// Silkscreen solo a 16px: 1 píxel de la fuente = 2px CSS.
+@mixin tty-key {
+  font-family: var(--font-key);
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  text-transform: lowercase;
+  text-shadow: none;
+}

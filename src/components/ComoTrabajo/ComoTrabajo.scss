@@ -1,0 +1,72 @@
+@use "../../styles/abstracts" as *;
+
+// Página de man(1): cabecera, principios numerados y línea de estado de less.
+.manual {
+  &__header {
+    @include dim-text;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-tty);
+    font-size: 20px;
+  }
+
+  &__header-title {
+    @include down(md) {
+      display: none;
+    }
+  }
+
+  &__heading {
+    @include tty-key;
+    margin-top: 1.5rem;
+    color: var(--color-fosforo);
+  }
+
+  &__list {
+    margin-top: 0.75rem;
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: 4ch 1fr;
+    border-top: 1px solid var(--color-linea);
+    padding-block: 1.25rem;
+
+    @include up(md) {
+      grid-template-columns: 7ch 1fr;
+    }
+  }
+
+  &__number {
+    @include dim-text;
+    font-family: var(--font-tty);
+    font-size: 26px;
+    line-height: 1.15;
+  }
+
+  &__text {
+    max-width: 60ch;
+    margin-top: 0.5rem;
+  }
+
+  &__status {
+    @include reverse-video(tenue);
+    margin-top: 1.5rem;
+    padding-inline: 0.5rem;
+    font-family: var(--font-tty);
+    font-size: 20px;
+    line-height: 1.75rem;
+  }
+
+  &__status-long {
+    @include down(sm) {
+      display: none;
+    }
+  }
+
+  &__status-short {
+    @include up(sm) {
+      display: none;
+    }
+  }
+}

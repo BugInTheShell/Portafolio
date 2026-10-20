@@ -1,0 +1,53 @@
+@use "../../styles/abstracts" as *;
+
+.stack {
+  &__total {
+    @include tty-label;
+  }
+
+  &__groups {
+    display: grid;
+    column-gap: 3rem;
+    margin-top: 0.5rem;
+
+    @include up(md) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  &__group {
+    border-top: 1px solid var(--color-linea);
+    padding-block: 1.25rem;
+  }
+
+  &__group-title {
+    font-family: var(--font-tty);
+    font-size: 24px;
+    line-height: 1.75rem;
+    color: var(--color-fosforo);
+  }
+
+  &__permissions {
+    @include dim-text;
+    display: none;
+    font-family: var(--font-tty);
+    font-size: 20px;
+
+    @include up(lg) {
+      display: inline;
+    }
+  }
+
+  &__chips {
+    margin-top: 0.75rem;
+
+    @include up(lg) {
+      padding-left: 88px;
+    }
+  }
+
+  &__daily {
+    @include tty-comment;
+    margin-top: 1.5rem;
+  }
+}

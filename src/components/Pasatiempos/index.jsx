@@ -1,6 +1,7 @@
 import Section from "../Section";
 import PixelIcon from "../PixelIcon";
 import { pasatiempos } from "../../data/perfil";
+import "./Pasatiempos.scss";
 
 // Un icono por pasatiempo, en el mismo orden que perfil.js.
 const iconos = ["libro", "guante", "caballo", "candado", "chip"];
@@ -15,11 +16,11 @@ const Pasatiempos = () => {
       title="Lo que hago lejos del teclado"
       intro="La disciplina del tatami y del tablero se nota en cómo depuro."
     >
-      <ul className="grid gap-x-12 sm:grid-cols-2">
+      <ul className="hobbies">
         {pasatiempos.map((item, i) => (
-          <li key={item} className="flex items-center gap-4 border-t border-linea py-4" data-out>
-            <PixelIcon name={iconos[i] ?? "chip"} className="text-fosforo" />
-            <span className="font-tty text-[26px] leading-[1.15] text-texto">{item}</span>
+          <li key={item} className="hobbies__item" data-out>
+            <PixelIcon name={iconos[i] ?? "chip"} className="hobbies__icon" />
+            <span className="hobbies__name">{item}</span>
           </li>
         ))}
       </ul>

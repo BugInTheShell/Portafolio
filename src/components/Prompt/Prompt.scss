@@ -1,0 +1,61 @@
+@use "../../styles/abstracts" as *;
+
+.prompt {
+  @include tty-prompt;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: 1rem;
+
+  &__line {
+    min-width: 0;
+  }
+
+  &__user {
+    color: var(--color-fosforo);
+  }
+
+  &__host {
+    @include down(sm) {
+      display: none;
+    }
+  }
+
+  &__separator {
+    @include dim-text;
+  }
+
+  &__cmd {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: bottom;
+
+    /* backwards: al terminar, el ancho vuelve a auto y no recorta el comando */
+    @media (prefers-reduced-motion: no-preference) {
+      &--typed {
+        animation: prompt-type calc(var(--n) * 45ms) steps(var(--n), end) var(--delay, 0ms) backwards;
+      }
+    }
+  }
+
+  &__tag {
+    @include reverse-video(tenue);
+    padding-inline: 1ch;
+
+    @include down(sm) {
+      display: none;
+    }
+  }
+}
+
+@keyframes prompt-type {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: calc(var(--n) * 1ch);
+  }
+}

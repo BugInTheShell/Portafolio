@@ -6,6 +6,7 @@ import Section from "../Section";
 import PixelIcon from "../PixelIcon";
 import pdfFile from "../../assets/EstebanGalvanCV.pdf";
 import { contacto } from "../../data/perfil";
+import "./Contacto.scss";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,10 +19,10 @@ const Corchetes = ({ children }) => (
 );
 
 const Externo = ({ href, primario = false, children }) => (
-  <a href={href} target="_blank" rel="noreferrer" className={`tty-btn tty-key ${primario ? "tty-btn-primario" : "tty-btn-linea"}`}>
+  <a href={href} target="_blank" rel="noreferrer" className={`button ${primario ? "button--primary" : "button--outline"}`}>
     <PixelIcon name="externo" />
     <Corchetes>{children}</Corchetes>
-    <span className="sr-only"> (se abre en otra pestaña)</span>
+    <span className="visually-hidden"> (se abre en otra pestaña)</span>
   </a>
 );
 
@@ -35,7 +36,7 @@ const Contacto = () => {
         trigger: footer.current,
         start: "top bottom",
         once: true,
-        onEnter: () => footer.current.querySelector(".tty-cursor")?.classList.add("tty-blink"),
+        onEnter: () => footer.current.querySelector(".cursor")?.classList.add("cursor--blink"),
       });
     },
     { scope: footer }
@@ -58,19 +59,19 @@ const Contacto = () => {
             : "Revisa mi código en GitHub o descarga mi CV."
         }
       >
-        <div className="relative mr-2 mb-2 max-w-[680px]" data-out>
-          <div aria-hidden="true" className="tty-sombra" />
-          <div className="relative border-[6px] border-double border-fosforo bg-panel p-4 pt-8 md:p-8">
-            <span aria-hidden="true" className="tty-key tty-rev absolute -top-[15px] left-4 px-2">
+        <div className="contact" data-out>
+          <div aria-hidden="true" className="contact__shadow" />
+          <div className="contact__dialog">
+            <span aria-hidden="true" className="contact__badge">
               contacto.sh
             </span>
-            <div className="flex flex-wrap gap-4">
+            <div className="contact__actions">
               {contacto.email && (
-                <a href={`mailto:${contacto.email}`} className="tty-btn tty-btn-primario tty-key">
+                <a href={`mailto:${contacto.email}`} className="button button--primary">
                   <Corchetes>escríbeme</Corchetes>
                 </a>
               )}
-              <a href={pdfFile} download="EstebanGalvanCV.pdf" className="tty-btn tty-btn-linea tty-key">
+              <a href={pdfFile} download="EstebanGalvanCV.pdf" className="button button--outline">
                 <PixelIcon name="descarga" />
                 <Corchetes>descargar cv</Corchetes>
               </a>
@@ -85,20 +86,20 @@ const Contacto = () => {
         </div>
       </Section>
 
-      <footer ref={footer} className="border-t border-linea">
-        <div className="mx-auto flex max-w-[1120px] flex-wrap items-center justify-between gap-4 px-4 py-8 md:px-8">
-          <p className="tty-prompt">
+      <footer ref={footer} className="footer">
+        <div className="footer__inner">
+          <p className="footer__prompt">
             <span aria-hidden="true">
-              <span className="text-fosforo">
-                esteban<span className="max-sm:hidden">@bugintheshell</span>
+              <span className="footer__user">
+                esteban<span className="footer__host">@bugintheshell</span>
               </span>
-              <span className="text-tenue">:~$</span>
-              <span className="tty-cursor" />
+              <span className="footer__path">:~$</span>
+              <span className="cursor" />
             </span>
-            <span className="sr-only">Esteban Galván</span>
+            <span className="visually-hidden">Esteban Galván</span>
           </p>
-          <p className="tty-label">
-            <span aria-hidden="true"># </span>hecho con React, Tailwind y tinta
+          <p className="footer__credit">
+            <span aria-hidden="true"># </span>hecho con React, Sass y tinta
           </p>
         </div>
       </footer>

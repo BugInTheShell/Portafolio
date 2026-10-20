@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import "./Navbar.scss";
 
 const links = [
   { href: "#stack", n: 1, label: "stack" },
@@ -39,7 +40,7 @@ const NavBar = () => {
       toggleRef.current?.focus();
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey); 
+    return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
   // Si el foco sale de la navegación, el menú se cierra para no tapar lo enfocado.
@@ -48,33 +49,28 @@ const NavBar = () => {
   };
 
   return (
-    <header className="sticky top-(--crt-bezel) z-10 border-b border-linea bg-panel">
+    <header className="navbar">
       <nav aria-label="Principal" onBlur={onBlur}>
-        <div className="mx-auto flex h-11 max-w-[1120px] items-stretch justify-between px-4 md:px-8">
-          <a
-            href="#inicio"
-            className="flex items-center font-tty text-[22px] whitespace-nowrap text-fosforo focus-visible:outline-offset-[-4px]"
-          >
+        <div className="navbar__bar">
+          <a href="#inicio" className="navbar__brand">
             Esteban Galván
-            <span className="tty-cursor tty-blink" aria-hidden="true" />
+            <span className="cursor cursor--blink" aria-hidden="true" />
           </a>
 
-          <ul className="hidden items-stretch md:flex">
+          <ul className="navbar__list">
             {links.map((link) => {
               const isActive = active === link.href;
               return (
-                <li key={link.href} className="flex">
+                <li key={link.href} className="navbar__item">
                   <a
                     href={link.href}
                     aria-current={isActive ? "location" : undefined}
-                    className={`flex items-center px-2 font-tty text-[20px] focus-visible:outline-offset-[-4px] ${
-                      isActive ? "tty-rev focus-visible:outline-tinta" : "text-tenue hover:text-texto"
-                    }`}
+                    className={`navbar__link${isActive ? " navbar__link--active" : ""}`}
                   >
                     <span aria-hidden="true">{link.n}:</span>
                     {link.label}
-                    {link.sr && <span className="sr-only">{link.sr}</span>}
-                    <span aria-hidden="true" className="inline-block w-[1ch]">
+                    {link.sr && <span className="visually-hidden">{link.sr}</span>}
+                    <span aria-hidden="true" className="navbar__marker">
                       {isActive ? "*" : ""}
                     </span>
                   </a>
@@ -86,7 +82,7 @@ const NavBar = () => {
           <button
             ref={toggleRef}
             type="button"
-            className="tty-key flex min-w-11 items-center justify-center text-fosforo focus-visible:outline-offset-[-4px] md:hidden"
+            className="navbar__toggle"
             aria-expanded={open}
             aria-controls="menu-movil"
             onClick={() => setOpen(!open)}
@@ -98,7 +94,7 @@ const NavBar = () => {
         </div>
 
         {open && (
-          <ul id="menu-movil" className="border-t border-linea bg-panel md:hidden">
+          <ul id="menu-movil" className="navbar__menu">
             {links.map((link) => {
               const isActive = active === link.href;
               return (
@@ -107,14 +103,12 @@ const NavBar = () => {
                     href={link.href}
                     aria-current={isActive ? "location" : undefined}
                     onClick={() => setOpen(false)}
-                    className={`flex h-11 items-center px-4 font-tty text-[22px] focus-visible:outline-offset-[-4px] ${
-                      isActive ? "tty-rev focus-visible:outline-tinta" : "text-texto"
-                    }`}
+                    className={`navbar__menu-link${isActive ? " navbar__menu-link--active" : ""}`}
                   >
                     <span aria-hidden="true">({link.n})&nbsp;</span>
                     {link.label}
-                    {link.sr && <span className="sr-only">{link.sr}</span>}
-                    <span aria-hidden="true" className="ml-2">
+                    {link.sr && <span className="visually-hidden">{link.sr}</span>}
+                    <span aria-hidden="true" className="navbar__menu-marker">
                       {isActive ? "*" : ""}
                     </span>
                   </a>

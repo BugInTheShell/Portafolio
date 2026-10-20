@@ -1,0 +1,5 @@
+// Herramientas compartidas (no generan CSS): cada bloque las importa con
+// @use "../../styles/abstracts" as *;
+@forward "breakpoints";
+@forward "mixins";
+@forward "typography";

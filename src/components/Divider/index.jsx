@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import PixelIcon from "../PixelIcon";
+import "./Divider.scss";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,7 +18,7 @@ const Divider = ({ variant = "ornament" }) => {
       if (!ornament) return;
       const mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.from(".dash-rule", {
+        gsap.from(".divider__rule--dashed", {
           scaleX: 0,
           transformOrigin: (i) => (i === 0 ? "100% 50%" : "0% 50%"),
           ease: "steps(16)",
@@ -31,15 +32,15 @@ const Divider = ({ variant = "ornament" }) => {
   );
 
   return (
-    <div ref={ref} role="separator" className="mx-auto flex max-w-[1120px] items-center gap-3 px-4 md:px-8">
+    <div ref={ref} role="separator" className="divider">
       {ornament ? (
         <>
-          <span className="dash-rule flex-1" />
-          <PixelIcon name="rombo" cell={4} className="text-linea-fuerte" />
-          <span className="dash-rule flex-1" />
+          <span className="divider__rule divider__rule--dashed" />
+          <PixelIcon name="rombo" cell={4} className="divider__ornament" />
+          <span className="divider__rule divider__rule--dashed" />
         </>
       ) : (
-        <span className="dot-rule flex-1" />
+        <span className="divider__rule divider__rule--double" />
       )}
     </div>
   );

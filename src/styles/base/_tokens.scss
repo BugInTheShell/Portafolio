@@ -1,0 +1,63 @@
+@use "../abstracts" as *;
+
+/* Tokens del sistema "Phosphor TTY": tinta, fósforo y píxel. */
+:root {
+  --color-tinta: #0a0c0b;
+  --color-panel: #0f1512;
+  --color-linea: #1f3326;
+  --color-linea-fuerte: #3f7a52;
+  --color-fosforo: #5af78e;
+  --color-texto: #c4ecce;
+  --color-tenue: #7fae8c;
+  --color-brasa: #ff5f56;
+  --color-sangre: #9b1c1c;
+  --color-sangre-viva: #b3261e;
+  --color-hueso: #e8e3d8;
+
+  --font-tty: "VT323", "VT323 fallback", ui-monospace, monospace;
+  --font-key: "Silkscreen", ui-monospace, monospace;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Presupuesto de contraste: el peor oscurecimiento sobre texto es 0.116
+     (barrido + caída inferior). hueso sobre sangre-viva deja de pasar 4.5:1
+     por encima de 0.165, así que no subas --crt-scan, la caída ni el reflejo. */
+  --crt-bezel: 0px; /* en móvil no hay bisel: solo esquinas y labio */
+  --crt-esquina: 16px;
+  --crt-px: calc(var(--crt-esquina) / 8); /* 1 celda de la esquina = 2/3/4px */
+  --crt-caida: 12px; /* oscurecimiento lateral: siempre dentro del margen sin texto */
+  --crt-scan: rgb(0 0 0 / 0.06);
+  --crt-bloom: 0 0 6px rgb(90 247 142 / 0.1);
+
+  @include up(md) {
+    --crt-bezel: 10px;
+    --crt-esquina: 24px;
+    --crt-caida: 24px;
+  }
+
+  @include up(xl) {
+    --crt-bezel: 14px;
+    --crt-esquina: 32px;
+    --crt-caida: 64px;
+  }
+
+  /* Al imprimir y con colores forzados no hay monitor: solo el contenido. */
+  @media print {
+    --crt-bezel: 0px;
+  }
+
+  @media (forced-colors: active) {
+    --crt-bezel: 0px;
+  }
+
+  @media (prefers-contrast: more) {
+    --color-tenue: #c4ecce;
+  }
+}
+
+/* VT323 es mucho más estrecha que las monoespaciadas del sistema:
+   el fallback ajustado evita el salto de layout al cargar la fuente. */
+@font-face {
+  font-family: "VT323 fallback";
+  src: local("Courier New"), local("DejaVu Sans Mono"), local("Menlo");
+  size-adjust: 66.7%;
+}

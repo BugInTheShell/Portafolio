@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Prompt from "../Prompt";
+import "./Section.scss";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,18 +43,18 @@ const Section = ({ id, cwd, cmd, tag, title, intro, children }) => {
   );
 
   return (
-    <section ref={ref} id={id} aria-labelledby={`${id}-titulo`} className="mx-auto max-w-[1120px] px-4 py-16 md:px-8 md:py-24">
+    <section ref={ref} id={id} aria-labelledby={`${id}-titulo`} className="section">
       <Prompt cwd={cwd} cmd={cmd} tag={tag} />
-      <h2 id={`${id}-titulo`} className="tty-h2 tty-glow mt-6">
+      <h2 id={`${id}-titulo`} className="heading heading--lg heading--glow section__title">
         {title}
       </h2>
       {intro && (
-        <p className="tty-comment mt-3 max-w-[64ch]">
+        <p className="section__intro">
           <span aria-hidden="true"># </span>
           {intro}
         </p>
       )}
-      <div className="mt-10">{children}</div>
+      <div className="section__body">{children}</div>
     </section>
   );
 };

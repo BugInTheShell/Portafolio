@@ -1,0 +1,84 @@
+@use "../abstracts" as *;
+
+// Bloque heading: títulos en VT323.
+//   heading--xl  h1 del hero
+//   heading--lg  h2 de sección
+//   heading--md  h3 de tarjeta o principio
+//   heading--glow  halo de fósforo
+.heading {
+  font-family: var(--font-tty);
+  color: var(--color-fosforo);
+
+  &--xl {
+    position: relative;
+    font-size: 40px;
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  &--lg {
+    position: relative;
+    font-size: 36px;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  &--md {
+    font-size: 25px; /* 1 píxel de VT323 = 1px CSS */
+    line-height: 27px;
+  }
+
+  /* Líneas de doble tamaño del VT100 (DECDHL): tamaños en múltiplos enteros del
+     píxel de VT323 (1 píxel = 0.04em) y una línea de barrido por fila de píxel. */
+  @include up(md) {
+    &--xl {
+      --p: 2.5px;
+      font-size: 62.5px;
+      line-height: 62.5px;
+    }
+
+    &--lg {
+      --p: 2px;
+      font-size: 50px;
+      line-height: 54px; /* 27 píxeles: el barrido cae en cada fila */
+    }
+
+    &--xl::after,
+    &--lg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        transparent 0 calc(var(--p) - 1px),
+        rgb(10 12 11 / 0.4) calc(var(--p) - 1px) var(--p)
+      );
+    }
+  }
+
+  @include up(lg) {
+    &--xl {
+      --p: 3px;
+      font-size: 75px;
+      line-height: 75px;
+    }
+  }
+
+  &--glow {
+    @include glow;
+  }
+
+  @media print, (forced-colors: active), (prefers-contrast: more) {
+    &--xl::after,
+    &--lg::after {
+      display: none;
+    }
+  }
+
+  @media (forced-colors: active), (prefers-contrast: more) {
+    &--glow {
+      text-shadow: none;
+    }
+  }
+}

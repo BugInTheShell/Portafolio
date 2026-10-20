@@ -1,0 +1,65 @@
+@use "sass:list";
+
+// Marco de 2px con esquinas en escalón (pixel art). $halo es una sombra extra opcional.
+@mixin pixel-frame($color, $halo: null) {
+  $sombras: (0 -2px 0 0 $color, 0 2px 0 0 $color, -2px 0 0 0 $color, 2px 0 0 0 $color);
+
+  @if $halo {
+    $sombras: list.append($sombras, $halo, $separator: comma);
+  }
+
+  box-shadow: $sombras;
+}
+
+// Vídeo inverso del VT100 (SGR 7): bloque encendido con su halo.
+@mixin reverse-video($tono: brillante) {
+  background: var(--color-fosforo);
+  color: var(--color-tinta);
+  box-shadow: 0 0 10px rgb(90 247 142 / 0.3);
+  text-shadow: none;
+
+  @if $tono == tenue {
+    background: var(--color-tenue);
+    box-shadow: 0 0 8px rgb(127 174 140 / 0.22);
+  }
+}
+
+// El fósforo tenue no florece: el halo le restaría contraste sobre el panel y el dither.
+@mixin dim-text {
+  color: var(--color-tenue);
+  text-shadow: none;
+}
+
+@mixin glow {
+  text-shadow:
+    0 0 2px rgb(90 247 142 / 0.2),
+    0 0 12px rgb(90 247 142 / 0.25);
+}
+
+// Enlaces de la barra: el anillo de foco va por dentro para no salirse de los 44px.
+@mixin focus-inset {
+  &:focus-visible {
+    outline-offset: -4px;
+  }
+}
+
+// Hover solo en dispositivos con puntero real.
+@mixin hover {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

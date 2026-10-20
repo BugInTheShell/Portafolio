@@ -1,0 +1,36 @@
+// Dither del hero: tres bandas de densidad decreciente desde la esquina.
+.dither {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  &__band {
+    position: absolute;
+    inset: 0;
+    background-image: var(--tile);
+    background-size: var(--size);
+    image-rendering: pixelated;
+
+    &--50 {
+      --tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2 2' shape-rendering='crispEdges'%3E%3Cpath fill='%231f3326' d='M0 0h1v1H0zM1 1h1v1H1z'/%3E%3C/svg%3E");
+      --size: 8px 8px;
+      mask-image: radial-gradient(circle at 100% 0, #000 0 18%, transparent 18%);
+    }
+
+    &--25 {
+      --tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2 2' shape-rendering='crispEdges'%3E%3Cpath fill='%231f3326' d='M0 0h1v1H0z'/%3E%3C/svg%3E");
+      --size: 8px 8px;
+      mask-image: radial-gradient(circle at 100% 0, transparent 0 18%, #000 18% 34%, transparent 34%);
+    }
+
+    &--12 {
+      --tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4' shape-rendering='crispEdges'%3E%3Cpath fill='%231f3326' d='M0 0h1v1H0zM2 2h1v1H2z'/%3E%3C/svg%3E");
+      --size: 16px 16px;
+      mask-image: radial-gradient(circle at 100% 0, transparent 0 34%, #000 34% 52%, transparent 52%);
+    }
+  }
+
+  @media (forced-colors: active), (prefers-contrast: more) {
+    display: none;
+  }
+}

@@ -1,0 +1,52 @@
+@use "../abstracts" as *;
+
+// Bloque button: tecla con marco de píxeles.
+//   button--primary  tecla encendida (brasa)
+//   button--outline  tecla apagada que se enciende al pasar
+.button {
+  @include tty-key;
+  @include pixel-frame(var(--color-linea-fuerte));
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin: 2px;
+  padding: 0 14px;
+
+  /* Las teclas encendidas brillan: el halo es la quinta sombra tras el marco. */
+  &--primary {
+    @include pixel-frame(var(--color-brasa), 0 0 14px rgb(255 95 86 / 0.25));
+    background: var(--color-sangre);
+    color: var(--color-hueso);
+
+    &:hover {
+      background: var(--color-sangre-viva);
+    }
+  }
+
+  &--outline {
+    background: var(--color-tinta);
+    color: var(--color-texto);
+
+    &:hover {
+      @include pixel-frame(var(--color-fosforo), 0 0 14px rgb(90 247 142 / 0.3));
+      background: var(--color-fosforo);
+      color: var(--color-tinta);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &:active {
+      transform: translateY(2px);
+    }
+  }
+
+  @media (forced-colors: active) {
+    &,
+    &--primary,
+    &--outline:hover {
+      box-shadow: none;
+      border: 2px solid ButtonText;
+    }
+  }
+}

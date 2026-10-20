@@ -1,0 +1,15 @@
+.pixel-icon {
+  display: inline-block;
+  flex-shrink: 0;
+
+  &__accent {
+    fill: var(--color-fosforo);
+  }
+
+  // Flecha dentro de un título: escala con el texto.
+  &--inline {
+    width: 0.32em;
+    height: 0.2em;
+    vertical-align: 0.12em;
+  }
+}

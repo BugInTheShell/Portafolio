@@ -1,6 +1,7 @@
 import Section from "../Section";
 import Chips from "../Chips";
 import { stack, herramientas } from "../../data/perfil";
+import "./Stack.scss";
 
 const Stack = () => {
   return (
@@ -12,27 +13,29 @@ const Stack = () => {
       title="Con qué trabajo"
       intro="Herramientas que uso a diario en producción, no una lista de cursos."
     >
-      <p aria-hidden="true" className="tty-label" data-out>
-        total {stack.length}
-      </p>
-      <div className="mt-2 grid gap-x-12 md:grid-cols-2">
-        {stack.map((group) => (
-          <div key={group.title} className="border-t border-linea py-5" data-out>
-            <h3 className="font-tty text-[24px] leading-7 text-fosforo">
-              {/* permisos solo desde lg: a 768px la columna es estrecha y el nombre se partía */}
-              <span aria-hidden="true" className="hidden font-tty text-[20px] text-tenue lg:inline">
-                drwxr-xr-x{" "}
-              </span>
-              {group.title}
-              <span aria-hidden="true">/</span>
-            </h3>
-            <Chips items={group.items} className="mt-3 lg:pl-[88px]" />
-          </div>
-        ))}
+      <div className="stack">
+        <p aria-hidden="true" className="stack__total" data-out>
+          total {stack.length}
+        </p>
+        <div className="stack__groups">
+          {stack.map((group) => (
+            <div key={group.title} className="stack__group" data-out>
+              <h3 className="stack__group-title">
+                {/* permisos solo desde lg: a 768px la columna es estrecha y el nombre se partía */}
+                <span aria-hidden="true" className="stack__permissions">
+                  drwxr-xr-x{" "}
+                </span>
+                {group.title}
+                <span aria-hidden="true">/</span>
+              </h3>
+              <Chips items={group.items} className="stack__chips" />
+            </div>
+          ))}
+        </div>
+        <p className="stack__daily" data-out>
+          <span aria-hidden="true"># </span>día a día: {herramientas}
+        </p>
       </div>
-      <p className="tty-comment mt-6" data-out>
-        <span aria-hidden="true"># </span>día a día: {herramientas}
-      </p>
     </Section>
   );
 };

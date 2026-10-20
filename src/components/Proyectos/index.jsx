@@ -2,12 +2,13 @@ import Section from "../Section";
 import Chips from "../Chips";
 import { ConFlechas } from "../PixelIcon";
 import { proyectos } from "../../data/perfil";
+import "./Proyectos.scss";
 
 // "Pipeline de leads HubSpot → Zoho" -> "pipeline-de-leads-hubspot-zoho"
 const slug = (text) =>
   text
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[̀-ͯ]/g, "")
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
@@ -22,34 +23,31 @@ const Proyectos = () => {
       title="Proyectos destacados"
       intro="Cosas que están en producción y por qué existen."
     >
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+      <div className="projects">
         {proyectos.map((proyecto, i) => (
-          <article key={proyecto.title} className="px-frame min-w-0 bg-panel" data-out>
-            <div
-              aria-hidden="true"
-              className="tty-rev tty-rev-tenue flex h-8 items-center justify-between gap-3 px-3 font-tty text-[20px]"
-            >
-              <span className="min-w-0 truncate">{slug(proyecto.title)}.md</span>
-              <span className="max-sm:hidden">
+          <article key={proyecto.title} className="project-card" data-out>
+            <div aria-hidden="true" className="project-card__bar">
+              <span className="project-card__file">{slug(proyecto.title)}.md</span>
+              <span className="project-card__count">
                 {String(i + 1).padStart(2, "0")}/{String(proyectos.length).padStart(2, "0")}
               </span>
             </div>
-            <div className="grid gap-4 p-5 md:p-6">
-              <h3 className="tty-h3">
+            <div className="project-card__body">
+              <h3 className="heading heading--md">
                 <ConFlechas text={proyecto.title} />
               </h3>
-              <dl className="grid gap-1">
-                <dt className="tty-key text-brasa">
+              <dl className="project-card__details">
+                <dt className="project-card__term project-card__term--problem">
                   <span aria-hidden="true">- </span>problema
                 </dt>
-                <dd className="mb-3 text-[16px] leading-[26px]">{proyecto.problem}</dd>
-                <dt className="tty-key text-fosforo">
+                <dd className="project-card__description">{proyecto.problem}</dd>
+                <dt className="project-card__term project-card__term--solution">
                   <span aria-hidden="true">+ </span>solución
                 </dt>
-                <dd className="mb-3 text-[16px] leading-[26px]">{proyecto.solution}</dd>
-                <dt className="tty-key text-tenue">stack</dt>
+                <dd className="project-card__description">{proyecto.solution}</dd>
+                <dt className="project-card__term project-card__term--stack">stack</dt>
                 <dd>
-                  <Chips items={proyecto.stack} className="mt-1" />
+                  <Chips items={proyecto.stack} className="project-card__chips" />
                 </dd>
               </dl>
             </div>

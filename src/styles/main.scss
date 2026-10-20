@@ -1,0 +1,9 @@
+// Estilos globales. Los bloques de cada componente viven junto a su .jsx.
+@use "base/tokens";
+@use "base/reset";
+@use "base/crt";
+
+@use "blocks/heading";
+@use "blocks/button";
+@use "blocks/cursor";
+@use "blocks/visually-hidden";

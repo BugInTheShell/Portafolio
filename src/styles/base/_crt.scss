@@ -1,0 +1,173 @@
+@use "../abstracts" as *;
+
+/* ============================================================
+   Monitor CRT 1978-83 (VT100 / IBM 5151): la sesión de terminal se ve
+   dentro de un tubo de fósforo verde. Bisel, esquinas en escalón,
+   barrido estático y encendido del tubo. Todo con pseudo-elementos.
+   ============================================================ */
+
+html {
+  color-scheme: dark;
+  overflow-x: clip;
+  background: #000; /* la carcasa asoma en el rebote del scroll */
+
+  @media (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Margen para la barra fija al saltar por anclas. Va en las secciones, no en
+   html: con scroll-padding, enfocar un control de la barra fija hacía saltar la página.
+   Alto de la barra (44px + borde) más el bisel: el divisor previo queda debajo. */
+section[id] {
+  scroll-margin-top: calc(2.8125rem + var(--crt-bezel));
+}
+
+/* El contenido vive dentro del vidrio: el bisel nunca tapa texto.
+   El fósforo brillante florece un poco; el tenue no (ver dim-text). */
+body {
+  padding: var(--crt-bezel);
+  background: var(--color-tinta);
+  color: var(--color-texto);
+  font-family: var(--font-mono);
+  font-size: 17px;
+  line-height: 28px;
+  font-variant-ligatures: none;
+  font-synthesis: none;
+  text-shadow: var(--crt-bloom);
+  -webkit-font-smoothing: antialiased;
+
+  @include up(md) {
+    font-size: 18px;
+    line-height: 30px;
+  }
+
+  @media print {
+    text-shadow: none;
+  }
+
+  /* Con más contraste se queda el bisel, pero sin vidrio ni halo. */
+  @media (prefers-contrast: more) {
+    text-shadow: none;
+  }
+}
+
+/* Carcasa: bisel negro, esquinas de pantalla en escalón (8×8 celdas) y labio de vidrio. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  border: var(--crt-bezel) solid #000;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Cpath d='M0 0h5v1H0zM0 1h3v1H0zM0 2h2v1H0zM0 3h1v2H0z'/%3E%3Cpath fill='%231f3326' d='M5 0h3v1H5zM3 1h2v1H3zM2 2h1v1H2zM1 3h1v2H1zM0 5h1v3H0z'/%3E%3C/svg%3E")
+      left top / var(--crt-esquina) no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Cpath d='M3 0h5v1H3zM5 1h3v1H5zM6 2h2v1H6zM7 3h1v2H7z'/%3E%3Cpath fill='%231f3326' d='M0 0h3v1H0zM3 1h2v1H3zM5 2h1v1H5zM6 3h1v2H6zM7 5h1v3H7z'/%3E%3C/svg%3E")
+      right top / var(--crt-esquina) no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Cpath d='M0 7h5v1H0zM0 6h3v1H0zM0 5h2v1H0zM0 3h1v2H0z'/%3E%3Cpath fill='%231f3326' d='M5 7h3v1H5zM3 6h2v1H3zM2 5h1v1H2zM1 3h1v2H1zM0 0h1v3H0z'/%3E%3C/svg%3E")
+      left bottom / var(--crt-esquina) no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Cpath d='M3 7h5v1H3zM5 6h3v1H5zM6 5h2v1H6zM7 3h1v2H7z'/%3E%3Cpath fill='%231f3326' d='M0 7h3v1H0zM3 6h2v1H3zM5 5h1v1H5zM6 3h1v2H6zM7 0h1v3H7z'/%3E%3C/svg%3E")
+      right bottom / var(--crt-esquina) no-repeat,
+    linear-gradient(var(--color-linea), var(--color-linea)) top / calc(100% - 2 * var(--crt-esquina)) var(--crt-px) no-repeat,
+    linear-gradient(var(--color-linea), var(--color-linea)) bottom / calc(100% - 2 * var(--crt-esquina)) var(--crt-px) no-repeat,
+    linear-gradient(var(--color-linea), var(--color-linea)) left / var(--crt-px) calc(100% - 2 * var(--crt-esquina)) no-repeat,
+    linear-gradient(var(--color-linea), var(--color-linea)) right / var(--crt-px) calc(100% - 2 * var(--crt-esquina)) no-repeat;
+}
+
+/* Vidrio: telón de encendido (3 capas que en reposo miden 0), reflejo,
+   caída de brillo en los bordes y barrido estático. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: var(--crt-bezel);
+  z-index: 59;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--color-tinta), var(--color-tinta)),
+    linear-gradient(var(--color-tinta), var(--color-tinta)),
+    linear-gradient(var(--color-fosforo), var(--color-fosforo)),
+    radial-gradient(ellipse 60% 40% at 20% 0%, rgb(196 236 206 / 0.02), transparent 70%),
+    linear-gradient(to right, rgb(0 0 0 / 0.4), transparent var(--crt-caida), transparent calc(100% - var(--crt-caida)), rgb(0 0 0 / 0.4)),
+    linear-gradient(to bottom, rgb(0 0 0 / 0.35), transparent 8px, transparent calc(100% - 48px), rgb(0 0 0 / 0.06)),
+    repeating-linear-gradient(to bottom, transparent 0 2px, var(--crt-scan) 2px 3px);
+  background-position: top, bottom, center, 0 0, 0 0, 0 0, 0 0;
+  background-size: 100% 0, 100% 0, 0 0, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+  background-repeat: no-repeat;
+
+  /* Encendido del tubo: una línea de fósforo y la imagen se abre desde el centro. Una vez. */
+  @media (prefers-reduced-motion: no-preference) {
+    animation: crt-encendido 640ms backwards;
+  }
+
+  @media (prefers-contrast: more) {
+    display: none;
+  }
+}
+
+/* LED de encendido en el bisel inferior. */
+#root::after {
+  @include up(md) {
+    content: "";
+    position: fixed;
+    z-index: 61;
+    right: calc(var(--crt-bezel) + var(--crt-esquina) + 16px);
+    bottom: calc((var(--crt-bezel) - 4px) / 2);
+    width: 8px;
+    height: 4px;
+    pointer-events: none;
+    background: var(--color-fosforo);
+    box-shadow: 0 0 6px rgb(90 247 142 / 0.6);
+  }
+}
+
+@media print, (forced-colors: active) {
+  body::before,
+  body::after,
+  #root::after {
+    display: none;
+  }
+}
+
+::selection {
+  background: var(--color-sangre);
+  color: var(--color-hueso);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-fosforo);
+  outline-offset: 4px;
+}
+
+p {
+  @include down(sm) {
+    hyphens: auto;
+  }
+}
+
+/* Al imprimir o guardar como PDF, todo se ve aunque no se haya hecho scroll. */
+@media print {
+  [data-out] {
+    opacity: 1 !important;
+  }
+
+  [data-cmd] {
+    width: auto !important;
+  }
+}
+
+@keyframes crt-encendido {
+  0% {
+    background-size: 100% 50%, 100% 50%, 0 2px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    animation-timing-function: steps(3, end);
+  }
+
+  30% {
+    background-size: 100% 50%, 100% 50%, 100% 2px, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    animation-timing-function: steps(7, end);
+  }
+
+  100% {
+    background-size: 100% 0, 100% 0, 100% 0, 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+  }
+}
