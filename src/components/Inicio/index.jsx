@@ -4,7 +4,7 @@ import Prompt from "../Prompt";
 import DitherField from "../DitherField";
 import PixelIcon from "../PixelIcon";
 
-const Inicio = () => {
+const Inicio = () => { 
   return (
     <section id="inicio" className="relative overflow-hidden">
       <DitherField />
